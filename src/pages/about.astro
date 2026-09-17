@@ -1,0 +1,10 @@
+---
+import Base from "../layouts/Base.astro";
+import { loadSite, loadCopyHtml } from "../lib/site";
+
+const site = loadSite();
+const html = loadCopyHtml("about");
+---
+<Base title={`About · ${site.name}`} description="Luke Spooner. Camarillo, CA. Systems so small companies are not stuck in email and spreadsheets." path="/about">
+  <div class="wrap prose" set:html={html} />
+</Base>

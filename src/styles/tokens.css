@@ -1,0 +1,17 @@
+:root {
+  --paper: #f6f1e8;
+  --ink: #1c1916;
+  --ink-soft: #4a453f;
+  --rule: #d4cbbc;
+  --accent: #8c4a1f;
+  --card: #fffcf7;
+  --focus: #1c1916;
+  --ok: #215e3b;
+  --warn: #8a5a12;
+  --font-sans: "Source Sans 3", "Segoe UI", sans-serif;
+  --font-serif: "Source Serif 4", "Georgia", serif;
+  --measure: 66ch;
+  --header-h: 3.75rem;
+  --space: 1.25rem;
+  --radius: 2px;
+}

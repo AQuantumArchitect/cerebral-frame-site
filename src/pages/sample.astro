@@ -1,0 +1,16 @@
+---
+import Base from "../layouts/Base.astro";
+import FridaySheet from "../components/FridaySheet.astro";
+import PrintButton from "../components/PrintButton.astro";
+import { loadSite } from "../lib/site";
+
+const site = loadSite();
+---
+<Base title={`Sample weekly picture · ${site.name}`} description="Example of the one-page Friday picture. Your numbers, not these." path="/sample">
+  <div class="wrap">
+    <div class="actions no-print">
+      <PrintButton />
+    </div>
+    <FridaySheet />
+  </div>
+</Base>

@@ -1,0 +1,35 @@
+name: Cerebral Frame
+person: Luke Spooner
+phone: "+1-805-236-8182"
+phone_display: "(805) 236-8182"
+email: Somapptic@gmail.com
+city: Camarillo, CA
+region: Ventura County
+url: https://cerebralframe.com
+calendly: ""
+github: https://github.com/AQuantumArchitect/cerebral-frame-site
+eyebrow: Camarillo · Ventura County · remote when it helps
+hero_h1: Get the computer work off your plate.
+hero_lead: Cerebral Frame helps small shops, plants, and offices stop running the business out of inboxes and spreadsheets.
+primary_cta: Call (805) 236-8182
+secondary_cta: See where the time is going
+tertiary_cta: Book 20 minutes
+magnetic: Cerebral Frame helps owners of small local companies get the computer work out of the way — so the shop runs on a short list and a weekly picture, not a pile of email.
+ai_once: If a simple software helper is the right tool, we use it. If a spreadsheet is the right tool, we use that.
+offers:
+  - id: audit
+    owner_name: A look under the hood
+    typical: "$4,000–$8,000"
+    blurb: We sit with how the week actually runs, name the pile, and hand you a short list.
+  - id: sprint
+    owner_name: One problem, fixed
+    typical: "$8,000–$25,000"
+    blurb: One stuck process, taken off your plate and put on a weekly picture.
+  - id: seat
+    owner_name: A part-time technical lead
+    typical: "$6,000–$15,000 / month"
+    blurb: Someone who owns the computer work so you can own the shop.
+nav:
+  - { href: /work, label: Work }
+  - { href: /about, label: About }
+  - { href: /talk, label: Talk }

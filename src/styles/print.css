@@ -1,0 +1,56 @@
+@media print {
+  :root {
+    --paper: #ffffff;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+    font-size: 11pt;
+  }
+
+  .skip,
+  .site-header .nav,
+  .site-footer,
+  .actions,
+  .no-print,
+  .scan-nav,
+  form {
+    display: none !important;
+  }
+
+  .site-header {
+    position: static;
+    border-bottom: 1pt solid #000;
+  }
+
+  .header-phone {
+    color: #000;
+  }
+
+  a {
+    color: #000;
+    text-decoration: none;
+  }
+
+  .wrap {
+    padding: 0;
+    max-width: none;
+  }
+
+  .friday {
+    border-width: 1pt;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .hero h1,
+  .prose h1 {
+    font-size: 22pt;
+  }
+
+  @page {
+    margin: 0.6in;
+    size: letter;
+  }
+}

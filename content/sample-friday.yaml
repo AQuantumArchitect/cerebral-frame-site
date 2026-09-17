@@ -1,0 +1,19 @@
+title: Friday picture
+caption: Example of the one-page picture. Your numbers, not these.
+company: Harbor Tool & Supply
+kind: Example
+week_of: March 6, 2026
+numbers:
+  - { label: Orders this week, value: "41" }
+  - { label: Late jobs, value: "3" }
+  - { label: Cash in, value: "$18,400" }
+  - { label: Cash out, value: "$12,150" }
+slipped:
+  - Two special-order blades still sitting on the receiving bench since Tuesday.
+  - The Friday numbers were rebuilt from three spreadsheets again.
+needs_decision:
+  - Hire a Saturday counter person, or cut Saturday hours in April.
+  - Write off the $640 Willard invoice or send it one more time.
+already_handled:
+  - Purchase orders under $200 now go out without a second signature.
+  - Vendor emails for backorders land on one list, not twelve inboxes.

@@ -1,0 +1,52 @@
+---
+import { loadSite, telHref } from "../lib/site";
+const site = loadSite();
+const sent = Astro.url.searchParams.get("sent") === "1";
+---
+{sent ? (
+  <div class="success" role="status">
+    <p>Got it. If you want a faster loop, call <a href={telHref(site.phone)}>{site.phone_display}</a>.</p>
+    <p>You can also email <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+  </div>
+) : (
+  <form class="form" method="post" action="/api/contact">
+    <label>
+      Name
+      <input name="name" type="text" autocomplete="name" required maxlength="120" />
+    </label>
+    <label>
+      Phone or email
+      <input name="reach" type="text" autocomplete="tel" required maxlength="120" />
+    </label>
+    <label>
+      Kind of place
+      <select name="place" required>
+        <option value="" disabled selected>Choose one</option>
+        <option value="shop">Shop</option>
+        <option value="office">Office</option>
+        <option value="warehouse">Warehouse or plant</option>
+        <option value="other">Other</option>
+      </select>
+    </label>
+    <label>
+      What eats the time
+      <select name="pain" required>
+        <option value="" disabled selected>Choose one</option>
+        <option value="numbers">Weekly numbers</option>
+        <option value="email">Email and follow-ups</option>
+        <option value="jobs">Jobs, inventory, or invoices</option>
+        <option value="lists">Customer or vendor lists</option>
+        <option value="unsure">We are not sure</option>
+      </select>
+    </label>
+    <label>
+      Anything we should know
+      <textarea name="note" maxlength="1000" rows="4"></textarea>
+    </label>
+    <div class="hp" aria-hidden="true">
+      <label>Website <input name="website" tabindex="-1" autocomplete="off" /></label>
+    </div>
+    <input type="hidden" name="t" value={String(Date.now())} />
+    <button class="btn" type="submit">Send</button>
+  </form>
+)}

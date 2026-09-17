@@ -1,0 +1,26 @@
+---
+import Base from "../layouts/Base.astro";
+import PrintButton from "../components/PrintButton.astro";
+import { loadSite, loadCopyHtml, telHref } from "../lib/site";
+
+const site = loadSite();
+const html = loadCopyHtml("home");
+---
+<Base title="Cerebral Frame" description={site.magnetic} path="/">
+  <div class="wrap">
+    <section class="hero">
+      <p class="eyebrow">{site.eyebrow}</p>
+      <h1>{site.hero_h1}</h1>
+      <p class="lead">{site.hero_lead}</p>
+      <div class="actions">
+        <a class="btn" href={telHref(site.phone)}>{site.primary_cta}</a>
+        <a class="btn btn-secondary" href="/scan">{site.secondary_cta}</a>
+        <a class="btn btn-ghost" href="/talk">{site.tertiary_cta}</a>
+      </div>
+    </section>
+    <div class="prose" set:html={html} />
+    <div class="actions no-print">
+      <PrintButton />
+    </div>
+  </div>
+</Base>

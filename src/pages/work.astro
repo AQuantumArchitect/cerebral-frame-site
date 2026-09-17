@@ -1,0 +1,21 @@
+---
+import Base from "../layouts/Base.astro";
+import { loadSite, loadCopyHtml } from "../lib/site";
+
+const site = loadSite();
+const html = loadCopyHtml("work");
+---
+<Base title={`Work · ${site.name}`} description="Typical work: a look under the hood, one problem fixed, or a part-time technical lead." path="/work">
+  <div class="wrap">
+    <div class="prose" set:html={html} />
+    <div class="cards">
+      {site.offers.map((offer) => (
+        <article class="card">
+          <h2>{offer.owner_name}</h2>
+          <p class="price">{offer.typical}</p>
+          <p>{offer.blurb}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</Base>

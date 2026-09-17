@@ -1,0 +1,118 @@
+---
+import { loadScanRules, loadSite, telHref } from "../lib/site";
+
+const rules = loadScanRules();
+const site = loadSite();
+const offerNames = {
+  audit: rules.offers.audit.owner_name,
+  sprint: rules.offers.sprint.owner_name,
+  seat: rules.offers.seat.owner_name,
+};
+---
+<section id="scan-app" data-rules={JSON.stringify(rules)} data-offers={JSON.stringify(offerNames)}>
+  <noscript>
+    <p>
+      This tool needs JavaScript in the browser. You can still
+      <a href={telHref(site.phone)}>call {site.phone_display}</a>
+      or <a href="/talk">go to Talk</a>.
+    </p>
+  </noscript>
+  <p class="scan-progress" hidden></p>
+  <h2 class="scan-prompt"></h2>
+  <div class="scan-options" role="group"></div>
+  <div class="scan-nav"></div>
+  <div class="result" hidden></div>
+</section>
+
+<script>
+  import { evaluateScan, parseScan, serializeScan } from "../lib/scan";
+  import type { ScanAnswers } from "../lib/scan";
+
+  const root = document.getElementById("scan-app");
+  if (root) {
+    const rules = JSON.parse(root.dataset.rules || "{}");
+    const offers = JSON.parse(root.dataset.offers || "{}");
+    const progress = root.querySelector(".scan-progress") as HTMLElement;
+    const promptEl = root.querySelector(".scan-prompt") as HTMLElement;
+    const optionsEl = root.querySelector(".scan-options") as HTMLElement;
+    const navEl = root.querySelector(".scan-nav") as HTMLElement;
+    const resultEl = root.querySelector(".result") as HTMLElement;
+
+    const keys = ["place", "size", "pain", "hours", "owner"] as const;
+    const answers: Partial<ScanAnswers> = {};
+    let step = 0;
+
+    const restored = parseScan(window.location.search);
+    if (restored) {
+      Object.assign(answers, restored);
+      showResult(restored);
+    } else {
+      render();
+    }
+
+    function render() {
+      const q = rules.questions[step];
+      progress.hidden = false;
+      resultEl.hidden = true;
+      progress.textContent = `Question ${step + 1} of ${rules.questions.length}`;
+      promptEl.textContent = q.prompt;
+      optionsEl.replaceChildren();
+      q.options.forEach((opt: { value: string; label: string }) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.textContent = opt.label;
+        const current = answers[keys[step]];
+        btn.setAttribute("aria-pressed", String(current === opt.value));
+        btn.addEventListener("click", () => {
+          (answers as Record<string, string>)[keys[step]] = opt.value;
+          if (step < rules.questions.length - 1) {
+            step += 1;
+            render();
+          } else {
+            showResult(answers as ScanAnswers);
+          }
+        });
+        optionsEl.append(btn);
+      });
+      navEl.replaceChildren();
+      if (step > 0) {
+        const back = document.createElement("button");
+        back.type = "button";
+        back.className = "btn btn-ghost";
+        back.textContent = "Back";
+        back.addEventListener("click", () => {
+          step -= 1;
+          render();
+        });
+        navEl.append(back);
+      }
+    }
+
+    function showResult(full: ScanAnswers) {
+      const result = evaluateScan(full);
+      const qs = serializeScan(full);
+      history.replaceState(null, "", `/scan?${qs}`);
+      progress.hidden = true;
+      promptEl.textContent = "Where the time is going";
+      optionsEl.replaceChildren();
+      navEl.replaceChildren();
+      resultEl.hidden = false;
+      const seat = result.mentionSeat
+        ? `<p>After that first fix, a part-time technical lead (${offers.seat}) is the usual second step — not the first.</p>`
+        : "";
+      resultEl.innerHTML = `
+        <p>${result.paragraph}</p>
+        <p class="hours">${result.annualHours} hours a year</p>
+        <p><strong>First step:</strong> ${offers[result.recommend]}. ${result.why}</p>
+        ${seat}
+        <div class="actions">
+          <a class="btn" href="tel:+18052368182">Call with this in front of you</a>
+          <a class="btn btn-secondary" href="/talk">Book 20 minutes</a>
+          <a class="btn btn-ghost" href="mailto:Somapptic@gmail.com?subject=${encodeURIComponent("Time picture")}&body=${encodeURIComponent(window.location.href)}">Email me this page</a>
+          <button class="btn btn-ghost" type="button" data-print>Print</button>
+        </div>
+      `;
+      resultEl.querySelector("[data-print]")?.addEventListener("click", () => window.print());
+    }
+  }
+</script>

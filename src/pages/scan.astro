@@ -1,0 +1,16 @@
+---
+import Base from "../layouts/Base.astro";
+import Scan from "../components/Scan.astro";
+import { loadScanRules, loadSite } from "../lib/site";
+
+const site = loadSite();
+const rules = loadScanRules();
+---
+<Base title={`${rules.title} · ${site.name}`} description={rules.intro} path="/scan">
+  <div class="wrap">
+    <p class="eyebrow">{site.name}</p>
+    <h1>{rules.title}</h1>
+    <p class="lead">{rules.intro}</p>
+    <Scan />
+  </div>
+</Base>

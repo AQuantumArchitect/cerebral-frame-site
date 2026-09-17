@@ -1,0 +1,54 @@
+title: Where is the time going?
+intro: Five questions. You get a plain-language picture and a first step. Nothing is sent until you choose to call, book, email, or print.
+questions:
+  - id: place
+    key: a
+    prompt: What kind of place is it?
+    options:
+      - { value: shop, label: Shop }
+      - { value: office, label: Office }
+      - { value: warehouse, label: Warehouse or plant }
+      - { value: other, label: Other }
+  - id: size
+    key: s
+    prompt: How many people work there most days?
+    options:
+      - { value: 1-5, label: 1–5 }
+      - { value: 6-15, label: 6–15 }
+      - { value: 16-50, label: 16–50 }
+      - { value: 50+, label: 50+ }
+  - id: pain
+    key: p
+    prompt: What eats the most time on a computer?
+    options:
+      - { value: numbers, label: Weekly numbers }
+      - { value: email, label: Email and follow-ups }
+      - { value: jobs, label: Jobs, inventory, or invoices }
+      - { value: lists, label: Customer or vendor lists }
+      - { value: unsure, label: We are not sure }
+  - id: hours
+    key: h
+    prompt: Rough hours each week spent on that?
+    options:
+      - { value: 1-2, label: 1–2 }
+      - { value: 3-5, label: 3–5 }
+      - { value: 6-10, label: 6–10 }
+      - { value: 10+, label: More than 10 }
+  - id: owner
+    key: o
+    prompt: Who owns it today?
+    options:
+      - { value: owner, label: Owner }
+      - { value: office-manager, label: Office manager }
+      - { value: whoever, label: Whoever is free }
+      - { value: outside, label: Outside bookkeeper or IT }
+offers:
+  audit:
+    owner_name: A look under the hood
+    why: Start by sitting with how the week actually runs, before buying a fix.
+  sprint:
+    owner_name: One problem, fixed
+    why: The hours and the owner-load are high enough that one stuck process is worth taking off the plate.
+  seat:
+    owner_name: A part-time technical lead
+    why: After the first fix, the computer work still needs an owner who is not also running the floor.

@@ -1,0 +1,15 @@
+---
+import { loadSite, telHref } from "../lib/site";
+const site = loadSite();
+---
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>Cerebral Frame · {site.city}</span>
+    <a href={telHref(site.phone)}>{site.phone_display}</a>
+    <a href={`mailto:${site.email}`}>{site.email}</a>
+    <a href="/privacy">Privacy</a>
+    <a href="/terms">Terms</a>
+    <a href="/card.vcf">Save contact</a>
+    <a href="/built-with">How this site is built</a>
+  </div>
+</footer>

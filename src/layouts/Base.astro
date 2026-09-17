@@ -1,0 +1,79 @@
+---
+import "@fontsource/source-sans-3/latin-400.css";
+import "@fontsource/source-sans-3/latin-600.css";
+import "@fontsource/source-serif-4/latin-600.css";
+import "../styles/tokens.css";
+import "../styles/app.css";
+import "../styles/print.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { loadSite } from "../lib/site";
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+}
+
+const { title, description, path } = Astro.props;
+const site = loadSite();
+const url = new URL(path, site.url).toString();
+const og = new URL("/og.png", site.url).toString();
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LocalBusiness",
+      name: site.name,
+      telephone: site.phone,
+      email: site.email,
+      url: site.url,
+      image: og,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Camarillo",
+        addressRegion: "CA",
+        addressCountry: "US",
+      },
+      areaServed: site.region,
+    },
+    {
+      "@type": "ProfessionalService",
+      name: site.name,
+      telephone: site.phone,
+      email: site.email,
+      url: site.url,
+      areaServed: site.region,
+    },
+  ],
+};
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={url} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={url} />
+    <meta property="og:image" content={og} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={og} />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <Header path={path} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

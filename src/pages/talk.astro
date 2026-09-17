@@ -1,0 +1,56 @@
+---
+import QRCode from "qrcode";
+import Base from "../layouts/Base.astro";
+import ContactForm from "../components/ContactForm.astro";
+import { loadSite, loadCopyHtml, telHref } from "../lib/site";
+
+const site = loadSite();
+const html = loadCopyHtml("talk");
+const talkUrl = new URL("/talk", site.url).toString();
+const qrSvg = await QRCode.toString(talkUrl, { type: "svg", margin: 1, width: 160, color: { dark: "#1C1916", light: "#FFFCF7" } });
+const hasCalendly = Boolean(site.calendly);
+---
+<Base title={`Talk · ${site.name}`} description="Call, email, or book twenty minutes." path="/talk">
+  <div class="wrap">
+    <div class="prose" set:html={html} />
+    <div class="doors">
+      <article class="door">
+        <h2>Call</h2>
+        <p>Two minutes is enough.</p>
+        <a class="btn" href={telHref(site.phone)}>{site.phone_display}</a>
+      </article>
+      <article class="door">
+        <h2>Email</h2>
+        <p>In writing, when that is easier.</p>
+        <a class="btn btn-secondary" href={`mailto:${site.email}`}>{site.email}</a>
+      </article>
+      <article class="door">
+        <h2>Book</h2>
+        {hasCalendly ? (
+          <p>Twenty minutes on the calendar.</p>
+        ) : (
+          <p>No booking link yet. Call or email and we will pick a time.</p>
+        )}
+        {hasCalendly ? (
+          <a class="btn btn-ghost" href={site.calendly}>{site.tertiary_cta}</a>
+        ) : (
+          <a class="btn btn-ghost" href={telHref(site.phone)}>Call instead</a>
+        )}
+      </article>
+    </div>
+    {hasCalendly && (
+      <iframe
+        class="no-print"
+        title="Book 20 minutes"
+        src={site.calendly}
+        loading="lazy"
+        style="width:100%;min-height:640px;border:0;margin-top:1.5rem;background:var(--card)"
+      />
+    )}
+    <h2>Short form</h2>
+    <ContactForm />
+    <h2>Save this page</h2>
+    <p>QR points at this Talk page. vCard is also at <a href="/card.vcf">/card.vcf</a>.</p>
+    <div class="qr" set:html={qrSvg} />
+  </div>
+</Base>

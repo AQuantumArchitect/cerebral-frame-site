@@ -1,0 +1,36 @@
+---
+import Base from "../layouts/Base.astro";
+import { loadSite, loadCopyHtml, builtAt, commitSha } from "../lib/site";
+
+const site = loadSite();
+const html = loadCopyHtml("built-with");
+const built = builtAt();
+const commit = commitSha();
+const signature = `${site.person}
+${site.name}
+${site.phone_display}
+${site.email}
+${site.url}`;
+---
+<Base title={`How this site is built · ${site.name}`} description="Stack, scan rules, and source. For people who care how the shop is wired." path="/built-with">
+  <div class="wrap">
+    <div class="prose" set:html={html} />
+    <p><a href={site.github}>Public GitHub repo</a></p>
+    <p class="health">Last build: <span id="built-at">{built}</span> · commit <code id="commit">{commit.slice(0, 7)}</code></p>
+    <p>Lighthouse mobile (ship target): Performance / Accessibility / Best Practices ≥ 95, SEO ≥ 90. Re-run before putting the URL on cards.</p>
+    <h2>Email signature</h2>
+    <pre class="sig">{signature}</pre>
+    <p><a href="/llms.txt">llms.txt</a> · <a href="/llms-full.txt">llms-full.txt</a></p>
+  </div>
+</Base>
+<script>
+  fetch("/api/health")
+    .then((r) => r.json())
+    .then((data) => {
+      const built = document.getElementById("built-at");
+      const commit = document.getElementById("commit");
+      if (built && data.builtAt) built.textContent = data.builtAt;
+      if (commit && data.commit) commit.textContent = String(data.commit).slice(0, 7);
+    })
+    .catch(() => {});
+</script>

@@ -1,0 +1,26 @@
+---
+import { loadSite, telHref } from "../lib/site";
+
+interface Props {
+  path: string;
+}
+
+const { path } = Astro.props;
+const site = loadSite();
+---
+<header class="site-header">
+  <div class="header-inner">
+    <a class="wordmark" href="/">
+      <span class="frame-mark" aria-hidden="true"></span>
+      Cerebral Frame
+    </a>
+    <nav class="nav" aria-label="Primary">
+      {site.nav.map((item) => (
+        <a href={item.href} aria-current={path === item.href ? "page" : undefined}>
+          {item.label}
+        </a>
+      ))}
+    </nav>
+    <a class="header-phone" href={telHref(site.phone)}>{site.phone_display}</a>
+  </div>
+</header>

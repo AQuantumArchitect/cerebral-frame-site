@@ -1,0 +1,35 @@
+---
+import { loadFriday } from "../lib/site";
+const sample = loadFriday();
+---
+<article class="friday">
+  <header>
+    <div>
+      <p class="kicker">{sample.kind}</p>
+      <h1>{sample.company}</h1>
+      <p>{sample.title} · week of {sample.week_of}</p>
+    </div>
+  </header>
+  <h2>This week’s numbers</h2>
+  <div class="nums">
+    {sample.numbers.map((n) => (
+      <div>
+        <span>{n.label}</span>
+        <strong>{n.value}</strong>
+      </div>
+    ))}
+  </div>
+  <h2>What slipped</h2>
+  <ul>
+    {sample.slipped.map((item) => <li>{item}</li>)}
+  </ul>
+  <h2>What needs a decision</h2>
+  <ul>
+    {sample.needs_decision.map((item) => <li>{item}</li>)}
+  </ul>
+  <h2>What the system already handled</h2>
+  <ul>
+    {sample.already_handled.map((item) => <li>{item}</li>)}
+  </ul>
+  <p class="caption">{sample.caption}</p>
+</article>

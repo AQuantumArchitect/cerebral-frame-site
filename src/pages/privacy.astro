@@ -1,0 +1,8 @@
+---
+import Base from "../layouts/Base.astro";
+import { loadSite, loadCopyHtml } from "../lib/site";
+const site = loadSite();
+---
+<Base title={`Privacy · ${site.name}`} description="We use what you send to get back to you. No ads, no cookie wall." path="/privacy">
+  <div class="wrap prose" set:html={loadCopyHtml("privacy")} />
+</Base>
