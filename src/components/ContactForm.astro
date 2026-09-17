@@ -9,7 +9,7 @@ const sent = Astro.url.searchParams.get("sent") === "1";
     <p>You can also email <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
   </div>
 ) : (
-  <form class="form" method="post" action="/api/contact">
+  <form class="form" method="post" action="/api/contact" data-contact>
     <label>
       Name
       <input name="name" type="text" autocomplete="name" required maxlength="120" />

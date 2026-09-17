@@ -1,0 +1,105 @@
+---
+---
+<section class="book" id="book">
+  <h2>Book 20 minutes</h2>
+  <p>Pacific time, Tuesday through Thursday. Pick a slot. It lands on the butler calendar, not a booking company.</p>
+  <div class="slot-days" data-book></div>
+  <form class="form book-form" hidden>
+    <input type="hidden" name="start" />
+    <p class="picked"></p>
+    <label>
+      Name
+      <input name="name" type="text" required maxlength="120" autocomplete="name" />
+    </label>
+    <label>
+      Phone or email
+      <input name="reach" type="text" required maxlength="120" autocomplete="tel" />
+    </label>
+    <button class="btn" type="submit">Hold this slot</button>
+  </form>
+  <p class="book-status" hidden></p>
+</section>
+
+<script>
+  const root = document.querySelector("[data-book]");
+  const form = document.querySelector(".book-form") as HTMLFormElement | null;
+  const status = document.querySelector(".book-status") as HTMLElement | null;
+  if (root && form && status) {
+    const picked = form.querySelector(".picked") as HTMLElement;
+    const startInput = form.querySelector("input[name=start]") as HTMLInputElement;
+
+    fetch("/api/slots")
+      .then((r) => r.json())
+      .then((data) => {
+        const slots: { start: string; label: string }[] = data.slots || [];
+        if (!slots.length) {
+          root.innerHTML = "<p>No open slots in the next two weeks. Call or email.</p>";
+          return;
+        }
+        const groups = new Map<string, typeof slots>();
+        for (const s of slots) {
+          const day = s.label.split(",").length > 1 ? s.label.replace(/,?\s+\d{1,2}:\d{2}.*$/, "").replace(/\s+\d{1,2}:\d{2}.*$/, "") : s.label.split(" ").slice(0, 3).join(" ");
+          const key = new Date(s.start).toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric", timeZone: data.timezone || "America/Los_Angeles" });
+          if (!groups.has(key)) groups.set(key, []);
+          groups.get(key)!.push(s);
+        }
+        root.replaceChildren();
+        for (const [day, list] of groups) {
+          const wrap = document.createElement("div");
+          wrap.className = "slot-day";
+          const h = document.createElement("h3");
+          h.textContent = day;
+          wrap.append(h);
+          const row = document.createElement("div");
+          row.className = "slot-row";
+          for (const s of list) {
+            const btn = document.createElement("button");
+            btn.type = "button";
+            btn.className = "slot";
+            btn.textContent = new Date(s.start).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", timeZone: data.timezone || "America/Los_Angeles" });
+            btn.addEventListener("click", () => {
+              root.querySelectorAll(".slot").forEach((el) => el.removeAttribute("aria-pressed"));
+              btn.setAttribute("aria-pressed", "true");
+              startInput.value = s.start;
+              picked.textContent = s.label;
+              form.hidden = false;
+              form.scrollIntoView({ block: "nearest" });
+            });
+            row.append(btn);
+          }
+          wrap.append(row);
+          root.append(wrap);
+        }
+      })
+      .catch(() => {
+        root.innerHTML = "<p>The slot list is down. Call or email.</p>";
+      });
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const body = {
+        start: startInput.value,
+        name: (form.elements.namedItem("name") as HTMLInputElement).value,
+        reach: (form.elements.namedItem("reach") as HTMLInputElement).value,
+      };
+      status.hidden = false;
+      status.textContent = "Holding…";
+      try {
+        const res = await fetch("/api/book", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(body),
+        });
+        const data = await res.json();
+        if (!res.ok || !data.ok) {
+          status.textContent = data.error || "That slot just went. Pick another.";
+          return;
+        }
+        form.hidden = true;
+        status.innerHTML = `Held for ${body.name}. You will get a confirmation. Meanwhile you can <a href="${data.google || "#"}">add it on your phone</a>, or call.`;
+      } catch {
+        status.textContent = "Could not hold the slot. Call instead.";
+      }
+    });
+  }
+</script>

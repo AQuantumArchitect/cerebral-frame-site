@@ -17,6 +17,17 @@ export interface NavItem {
   label: string;
 }
 
+export interface LinkItem {
+  label: string;
+  href: string;
+  note?: string;
+}
+
+export interface LinkTree {
+  heading: string;
+  items: LinkItem[];
+}
+
 export interface Site {
   name: string;
   person: string;
@@ -90,6 +101,10 @@ export function loadScanRules(): ScanRules {
 
 export function loadFriday(): FridaySample {
   return parseYaml(read("content/sample-friday.yaml")) as FridaySample;
+}
+
+export function loadLinks(): LinkTree {
+  return parseYaml(read("content/links.yaml")) as LinkTree;
 }
 
 export function loadCopyRaw(name: string): string {

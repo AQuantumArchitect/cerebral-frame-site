@@ -1,0 +1,8 @@
+heading: Other doors
+items:
+  - { label: The Broadcast, href: "https://the-broadcast-production.up.railway.app/", note: Expedition log }
+  - { label: LinkedIn, href: "https://www.linkedin.com/in/luke-spooner-ba5a8274", note: Luke Spooner }
+  - { label: GitHub, href: "https://github.com/AQuantumArchitect", note: Public work }
+  - { label: This site, href: "https://github.com/AQuantumArchitect/cerebral-frame-site", note: Source }
+  - { label: Call, href: "tel:+18052368182", note: "(805) 236-8182" }
+  - { label: Email, href: "mailto:Somapptic@gmail.com", note: Somapptic@gmail.com }

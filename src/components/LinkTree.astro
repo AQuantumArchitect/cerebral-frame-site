@@ -1,0 +1,15 @@
+---
+import { loadLinks } from "../lib/site";
+const links = loadLinks();
+---
+<section class="elsewhere">
+  <h2>{links.heading}</h2>
+  <ul class="link-tree">
+    {links.items.map((item) => (
+      <li>
+        <a href={item.href}>{item.label}</a>
+        {item.note && <span>{item.note}</span>}
+      </li>
+    ))}
+  </ul>
+</section>

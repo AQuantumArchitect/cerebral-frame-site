@@ -4,7 +4,7 @@ This page is for people who care how the shop is wired. If you just want help wi
 
 Astro 5. Pages are documents. The scan tool is a small script on one page, not a sitewide app. Railway hosts it. No database is required for the public site.
 
-Content is markdown and YAML. Changing an offer is a file, not a redesign.
+Content is markdown and YAML. Changing an offer is a file, not a redesign. Booking is our own slot list plus an .ics email, not Calendly. A phone can leave a 20-second video on /talk.
 
 ## How “Where is the time going?” works
 

@@ -1,0 +1,10 @@
+timezone: America/Los_Angeles
+duration_minutes: 20
+days_ahead: 14
+# ISO weekdays: 1 Mon … 7 Sun
+weekdays: [2, 3, 4]
+windows:
+  - { start: "09:00", end: "12:00" }
+  - { start: "13:00", end: "16:00" }
+title: Cerebral Frame — 20 minutes
+calendar_name: Cerebral Frame Butler

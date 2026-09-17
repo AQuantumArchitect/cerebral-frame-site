@@ -84,6 +84,16 @@ CALENDLY_URL=
 
 If `calendly` is empty, Talk hides the embed. Do not ship a broken iframe.
 
+Booking is self-built: `content/booking.yaml` + `src/lib/booking.mjs` + `POST /api/book`.
+It emails an .ics to FORM_TO (Somapptic butler inbox). Add events to the
+Google calendar named `Cerebral Frame Butler`, overlaid on the main calendar.
+Do not add Calendly.
+
+Video notes: phone `capture="user"` file input → `POST /api/note`. Private token URL.
+Do not use Telegram/Signal/Gchat for public visitors.
+
+About page link tree lives in `content/links.yaml`.
+
 Custom domain needs CNAME + TXT. Canonical `https://cerebralframe.com`.
 
 ## Acceptance (short)

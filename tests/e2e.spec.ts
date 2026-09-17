@@ -60,6 +60,24 @@ test("no banned words and footer built-with is not in the header", async ({ page
 
 test("form has at most five real fields", async ({ page }) => {
   await page.goto("/talk");
-  const fields = page.locator("form.form input:not(.hp input):not([type=hidden]), form.form select, form.form textarea");
+  const fields = page.locator("form[data-contact] input:not(.hp input):not([type=hidden]), form[data-contact] select, form[data-contact] textarea");
   expect(await fields.count()).toBeLessThanOrEqual(5);
+});
+
+test("about has Broadcast, LinkedIn, and GitHub doors", async ({ page }) => {
+  await page.goto("/about");
+  await expect(page.locator(".link-tree a[href*='the-broadcast']")).toBeVisible();
+  await expect(page.locator(".link-tree a[href*='linkedin.com']")).toBeVisible();
+  await expect(page.getByRole("link", { name: "GitHub" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "This site", exact: true })).toBeVisible();
+});
+
+test("talk offers self-built booking and a video note", async ({ page, request }) => {
+  const slots = await request.get("/api/slots");
+  expect(slots.ok()).toBeTruthy();
+  const body = await slots.json();
+  expect(Array.isArray(body.slots)).toBeTruthy();
+  await page.goto("/talk");
+  await expect(page.locator("#book")).toBeVisible();
+  await expect(page.locator("#video-note input[capture]")).toBeVisible();
 });

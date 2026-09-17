@@ -444,6 +444,75 @@ a:hover {
   font-size: 0.95rem;
 }
 
+.link-tree {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0;
+  max-width: 36rem;
+  border-top: 1px solid var(--rule);
+}
+
+.link-tree li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1rem;
+  align-items: baseline;
+  min-height: 48px;
+  border-bottom: 1px solid var(--rule);
+  padding: 0.65rem 0;
+}
+
+.link-tree a {
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.link-tree span {
+  color: var(--ink-soft);
+}
+
+.slot-days {
+  display: grid;
+  gap: 1.25rem;
+  margin: 1.25rem 0;
+}
+
+.slot-day h3 {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  margin: 0 0 0.5rem;
+}
+
+.slot-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.slot {
+  min-height: 48px;
+  min-width: 5.5rem;
+  padding: 0.5rem 0.75rem;
+  font: inherit;
+  background: var(--card);
+  border: 2px solid var(--rule);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.slot[aria-pressed="true"],
+.slot:hover {
+  border-color: var(--ink);
+}
+
+.book-form {
+  margin-top: 1rem;
+}
+
 @media (max-width: 640px) {
   .header-inner {
     flex-wrap: wrap;
