@@ -118,7 +118,7 @@ function saveBookings(list) {
 
 async function maybeEmail(subject, text, attachments = []) {
   const key = process.env.RESEND_API_KEY;
-  if (!key) return { emailed: false };
+  if (!key) return { emailed: false, reason: "no_key" };
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
@@ -126,14 +126,20 @@ async function maybeEmail(subject, text, attachments = []) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      from: process.env.FORM_FROM || "Cerebral Frame <noreply@cerebralframe.com>",
+      from: process.env.FORM_FROM || "Cerebral Frame <noreply@storbid.app>",
       to: [FORM_TO],
+      reply_to: FORM_TO,
       subject,
       text,
       attachments: attachments.map((a) => ({ filename: a.filename, content: a.content })),
     }),
   });
-  return { emailed: res.ok, status: res.status };
+  const body = await res.text();
+  if (!res.ok) {
+    console.error("[mail] resend", res.status, body.slice(0, 300));
+    return { emailed: false, status: res.status };
+  }
+  return { emailed: true, status: res.status };
 }
 
 function safeFile(urlPath) {
@@ -162,7 +168,7 @@ const server = http.createServer(async (req, res) => {
     return send(
       res,
       200,
-      JSON.stringify({ ok: true, builtAt: BUILT_AT, commit: COMMIT }),
+      JSON.stringify({ ok: true, builtAt: BUILT_AT, commit: COMMIT, mail: Boolean(process.env.RESEND_API_KEY) }),
       "application/json; charset=utf-8",
     );
   }
@@ -224,10 +230,10 @@ const server = http.createServer(async (req, res) => {
       });
       const google = googleTemplateUrl({ start, end, title, details: description });
       const text = `Cerebral Frame talk request\n\n${description}\n\nStart: ${start}\nEnd: ${end}\nGoogle: ${google}\n\nAdd the .ics to ${config.calendar_name} (overlay on the main calendar).`;
-      await maybeEmail(`Cerebral Frame talk — ${name}`, text, [
+      const mail = await maybeEmail(`Cerebral Frame talk — ${name}`, text, [
         { filename: "talk.ics", content: Buffer.from(ics).toString("base64") },
       ]).catch(() => ({ emailed: false }));
-      return send(res, 200, JSON.stringify({ ok: true, google }), "application/json; charset=utf-8");
+      return send(res, 200, JSON.stringify({ ok: true, google, emailed: Boolean(mail.emailed) }), "application/json; charset=utf-8");
     } catch {
       return send(res, 400, JSON.stringify({ ok: false }), "application/json; charset=utf-8");
     }
@@ -250,11 +256,11 @@ const server = http.createServer(async (req, res) => {
       fs.writeFileSync(path.join(dir, file), buf);
       fs.writeFileSync(path.join(dir, `${id}.json`), JSON.stringify({ id, token, name, reach, type, file, at: new Date().toISOString() }, null, 2));
       const watch = `${SITE_URL}/api/note/${id}?token=${token}`;
-      await maybeEmail(
+      const mail = await maybeEmail(
         `Cerebral Frame video note — ${name}`,
         `Visitor: ${name}\nReach: ${reach}\nWatch (private): ${watch}\nDo not post this link.`,
       ).catch(() => ({ emailed: false }));
-      return send(res, 200, JSON.stringify({ ok: true }), "application/json; charset=utf-8");
+      return send(res, 200, JSON.stringify({ ok: true, emailed: Boolean(mail.emailed) }), "application/json; charset=utf-8");
     } catch {
       return send(res, 400, JSON.stringify({ ok: false }), "application/json; charset=utf-8");
     }
@@ -270,12 +276,12 @@ const server = http.createServer(async (req, res) => {
       const kind = url.pathname === "/api/scan" ? "scan" : "contact";
       saveInquiry(kind, body);
       const text = JSON.stringify(body, null, 2);
-      await maybeEmail(kind === "scan" ? "Cerebral Frame scan" : "Cerebral Frame inquiry", text).catch(() => ({ emailed: false }));
+      const mail = await maybeEmail(kind === "scan" ? "Cerebral Frame scan" : "Cerebral Frame inquiry", text).catch(() => ({ emailed: false }));
       if (kind === "contact" && !(req.headers["content-type"] || "").includes("application/json")) {
         res.writeHead(303, { ...SECURITY, Location: "/talk?sent=1" });
         return res.end();
       }
-      return send(res, 200, JSON.stringify({ ok: true }), "application/json; charset=utf-8");
+      return send(res, 200, JSON.stringify({ ok: true, emailed: Boolean(mail.emailed) }), "application/json; charset=utf-8");
     } catch {
       return send(res, 400, JSON.stringify({ ok: false }), "application/json; charset=utf-8");
     }
