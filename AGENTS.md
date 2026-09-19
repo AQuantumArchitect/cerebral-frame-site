@@ -2,7 +2,9 @@
 
 This file is the friction killer. The full plan lives in the originating
 build doc; if that doc and this file disagree, the build doc wins. If this
-file and Broadcast disagree, this file wins.
+file and Broadcast disagree on the owner site, this file wins.
+Broadcast is hosted on the same company domain (`log.cerebralframe.com`).
+That is not a console skin of this site.
 
 ## What this is
 
@@ -72,7 +74,10 @@ If `POST /api/scan` is down, the page still computes locally.
 
 ## Deploy
 
-Own Railway project `cerebral-frame`, isolated from Broadcast.
+Railway project `cerebral-frame` is the owner site. The Broadcast stays
+its own Railway service (volume + ingest token) and takes
+`log.cerebralframe.com`. Do not merge git repos. Do not merge Terrarium
+or AttentionShield into this project. Do not mint a fourth live object.
 
 ```
 PUBLIC_SITE_URL=https://cerebralframe.com

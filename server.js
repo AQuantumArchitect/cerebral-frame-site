@@ -10,6 +10,7 @@ import {
   makeIcs,
   googleTemplateUrl,
 } from "./src/lib/booking.mjs";
+import { apexRedirect } from "./src/lib/host.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DIST = path.join(__dirname, "dist");
@@ -163,6 +164,11 @@ function safeFile(urlPath) {
 
 const server = http.createServer(async (req, res) => {
   const url = new URL(req.url || "/", `http://${req.headers.host || "localhost"}`);
+  const toApex = apexRedirect(req.headers.host, url.pathname, url.search);
+  if (toApex) {
+    res.writeHead(301, { ...SECURITY, Location: toApex });
+    return res.end();
+  }
 
   if (req.method === "GET" && url.pathname === "/api/health") {
     return send(

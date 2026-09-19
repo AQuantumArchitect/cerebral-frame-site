@@ -18,7 +18,9 @@ Content lives in `content/`. Components do not contain sentences. Scan logic is 
 
 ## Deploy
 
-Own Railway project `cerebral-frame`, isolated from The Broadcast.
+Railway project `cerebral-frame` serves this site. The Broadcast is a
+second service on the same company domain (`log.cerebralframe.com`),
+not a console skin of these pages. See `HOSTING.md`.
 
 ```bash
 railway up --detach -m "ship site"
@@ -30,4 +32,6 @@ Canonical domain: `https://cerebralframe.com` (CNAME + TXT at the DNS host). Unt
 
 ## Domain
 
-Apex `cerebralframe.com`, `www` 301 to apex. Phone in the header is the product.
+Apex `cerebralframe.com`, `www` 301 to apex. Log `log.cerebralframe.com`.
+Phone in the header is the product. Custom host 404s until Namecheap TXT
+ownership rows are public — Railway URL is the live box until then.
