@@ -1,6 +1,6 @@
 heading: Other doors
 items:
-  - { label: The Broadcast, href: "https://the-broadcast-production.up.railway.app/", note: Expedition log }
+  - { label: The Broadcast, href: "https://the-broadcast-production.up.railway.app/", note: Expedition log — log.cerebralframe.com after DNS verifies }
   - { label: LinkedIn, href: "https://www.linkedin.com/in/luke-spooner-ba5a8274", note: Luke Spooner }
   - { label: GitHub, href: "https://github.com/AQuantumArchitect", note: Public work }
   - { label: This site, href: "https://github.com/AQuantumArchitect/cerebral-frame-site", note: Source }
