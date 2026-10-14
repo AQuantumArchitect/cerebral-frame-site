@@ -11,9 +11,12 @@ That is not a console skin of this site.
 Owner-facing site for Cerebral Frame. Two words always. Never “Cerebral”
 alone. Never “Brain Frame.” Never a Broadcast console skin.
 
-Primary visitor: owner of a small brick-and-mortar company (often 50+,
-phone-first, not technical). Secondary: a technical buyer who wants proof
-we ship.
+Primary visitor: owner or operator of a small or mid-size company, anywhere,
+who wants the computer work built properly. Secondary: a technical buyer who
+wants proof we ship. Positioning (Luke, 2026-10-14): a small, fast
+engineering outfit — code, automation, and **Frames** (belief graphs of one
+company over its own ledger) as the primary offer. Confident, not folksy.
+The word "mercenary" describes the voice; it does not appear in copy.
 
 ## Commands
 
@@ -50,9 +53,14 @@ respect `prefers-reduced-motion`.
 
 - All sentences live in `content/`. Components do not contain sentences.
 - If `content/facts.md` is absent, do not invent employers or metrics.
-- Locked facts you may state: Luke Spooner · Camarillo, CA · (805) 236-8182 ·
-  physicist by training · years in Southern California manufacturing and
-  technical sales · work in person in Ventura County or by video.
+- Locked facts you may state: Luke Spooner · (805) 236-8182 · physicist by
+  training · years in manufacturing and technical sales · remote by default,
+  on site when it matters. Camarillo / Ventura County are true but no longer
+  lead: not on the card, not in the hero. Legal pages may keep jurisdiction.
+- The Frame: one noun, capitalized, always "a Frame" / "the Frame". Its three
+  states are current / stale / dark — never show a zero for an unmeasured thing.
+  No client Frame has shipped yet; say so where the offer is described.
+- Offers are Map / Build / Hold. Same names on /work, /scan, and the card.
 - Contact email for v1: `Somapptic@gmail.com` (temporary; `luke@cerebralframe.com` later).
 - Homepage may mention AI once, late, in owner language. Do not lead with
   “AI automation engineer.” Do not use “Fractional CTO” as H1.

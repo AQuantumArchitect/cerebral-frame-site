@@ -6,7 +6,7 @@ import { loadSite, loadCopyHtml } from "../lib/site";
 const site = loadSite();
 const html = loadCopyHtml("about");
 ---
-<Base title={`About · ${site.name}`} description="Luke Spooner. Camarillo, CA. Systems so small companies are not stuck in email and spreadsheets." path="/about">
+<Base title={`About · ${site.name}`} description="Cerebral Frame: a small, fast engineering outfit building code, automation, and Frames for small and mid-size companies. Run by Luke Spooner." path="/about">
   <div class="wrap">
     <div class="prose" set:html={html} />
     <LinkTree />

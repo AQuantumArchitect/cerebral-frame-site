@@ -1,9 +1,7 @@
 # About
 
-Luke Spooner. Camarillo, CA. Physicist by training. Years in Southern California manufacturing and technical sales.
+Cerebral Frame is run by Luke Spooner — physicist by training, years in manufacturing and technical sales, builder of systems ever since. The outfit is small and fast by design: one lead, a short bench, no account managers.
 
-I build systems so small companies are not stuck in email and spreadsheets. Work is in person in Ventura County, or by video.
+We build code and automation for small and mid-size companies, and we build Frames — live models of a business that know what they do not know. The same engine that draws a Frame of a company runs a house, a game, and a research program; that longer story lives on the expedition log linked below.
 
-The site is the shop window. If you want the phone, it is in the header. If you want to see how the week could look on one page, there is a sample. If you want to see how this site is wired, that is in the footer.
-
-Other doors — the expedition log, LinkedIn, GitHub — are listed below. No extra landing page.
+Remote by default, anywhere. On site when the problem is on the floor.

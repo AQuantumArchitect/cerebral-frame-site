@@ -1,7 +1,9 @@
-Cerebral Frame helps owners of small local companies get the computer work out of the way — so the shop runs on a short list and a weekly picture, not a pile of email.
+Most companies run on three things: what actually happened, what the owner believes is happening, and the gap between them. Orders, cash, late jobs, the vendor who said Tuesday. The gap is where the week goes.
 
-You already know the work. Orders, people, vendors, the Friday numbers. What eats the week is chasing it across inboxes, spreadsheets, and “I’ll remember.”
+A Frame closes it. It is a live model of your operation built on your own records — every number marked as current, stale, or dark, so you stop steering by the last thing someone remembered to say. It is the first thing we build and the thing everything else hangs off.
 
-We come on site in Ventura County, or by video when that is enough. You get a number you can tap, a page you can print, and a picture of the week you can hold up in a meeting.
+Then we build what the Frame says you need. Automations that take hand-offs off people. Integrations between systems that never talked. Small tools your team will actually open. Scoped in writing, shipped fast, yours when it is done.
 
-If a simple software helper is the right tool, we use it. If a spreadsheet is the right tool, we use that.
+We work remote by default and show up on site when the problem is on the floor. We are small on purpose: you talk to the people who build it.
+
+We use AI the way a shop uses a lathe. It is a tool on the floor, not the name on the door.

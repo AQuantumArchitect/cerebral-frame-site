@@ -1,13 +1,11 @@
 # Work
 
-Typical ranges, not quotes. A look under the hood is how most shops start. One problem, fixed is for when you already know what is eating the week. A part-time technical lead is for when the computer work should belong to someone who is not also running the floor.
+Three ways to hire us. Prices are typical ranges, not quotes; scope and the definition of done go in writing before anything starts.
 
-## What a month looks like
+**Map** comes first for most companies. We spend two weeks inside the operation — not a workshop, the actual inbox and the actual spreadsheet and the actual person who just knows — and hand you a Frame of it plus a short list of what to build.
 
-Week one: we watch how the week actually runs. Not a workshop. We sit with the inbox, the spreadsheet, the person who “just knows.”
+**Build** is for when you already know what is eating the week, or the Map just told you. One stuck process, taken off your people and shipped as working software.
 
-Week two: you get a short list. What to stop doing, what to write down, what to put on one Friday picture.
+**Hold** is for when the computer work should belong to someone who is not also running the floor. We own the backlog and keep the Frame live.
 
-Week three and four: we fix one thing that was stealing hours, or we stay on as the person who owns it.
-
-You will always be able to call. You will always be able to print the page.
+You can always call. You can always print the page.

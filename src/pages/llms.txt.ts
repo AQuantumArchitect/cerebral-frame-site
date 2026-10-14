@@ -14,15 +14,16 @@ Place: ${s.city} · ${s.region}
 Person: ${s.person}
 
 ## Who it is for
-Owners of small local companies (shops, plants, offices) who are running the business out of inboxes and spreadsheets.
+Owners and operators of small and mid-size companies who want the computer work built properly and a live model of the business — a Frame — that marks every number current, stale, or dark.
 
 ## Offers (typical ranges, not quotes)
 ${s.offers.map((o) => `- ${o.owner_name} (${o.id}): ${o.typical}`).join("\n")}
 
 ## Pages
 - / Home
-- /work Offers
-- /about Luke
+- /frame What a Frame is: a belief graph over the company's own ledger
+- /work Offers: Map, Build, Hold
+- /about Luke Spooner and the outfit
 - /talk Call, email, book, form
 - /scan Where is the time going? (deterministic rules, no model)
 - /sample Example Friday picture
