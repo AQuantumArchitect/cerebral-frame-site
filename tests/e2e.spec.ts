@@ -88,3 +88,16 @@ test("case page shows a Frame block either way and links the log", async ({ page
   await expect(page.locator("a[href*='the-broadcast'][href*='engine']").first()).toBeVisible();
   await expect(page.locator("header nav a[href*='the-broadcast']")).toHaveAttribute("target", "_blank");
 });
+
+test("case executes under production CSP and renders a received Frame", async ({ page }) => {
+  await page.route('https://the-broadcast-production.up.railway.app/api/frame', route => route.fulfill({
+    contentType: 'application/json',
+    headers: { 'access-control-allow-origin': '*' },
+    body: JSON.stringify({schema: 'frame/1', subject: 'Live evidence fixture', as_of: new Date().toISOString(), stale_after_s: 3600,
+      nodes: [{id: 'proof', label: 'Received observation', value: 7, age_s: 0, state: 'current'}]}),
+  }));
+  await page.goto('/case');
+  await expect(page.locator('#case-frame')).toContainText('Live evidence fixture');
+  await expect(page.locator('#case-frame')).toContainText('Received observation');
+  await expect(page.locator('#case-frame .tile-value')).toHaveText('7');
+});
