@@ -19,3 +19,7 @@ It is not a dashboard. It is not a chatbot. It is not a replacement for the pers
 ## Where it stands
 
 The Frame is the newest thing we offer. The engine under it has run for a year in a live building and in simulation. No client Frame has shipped yet; the first one gets our full attention and a written case study, with the client's permission, when it is done. If you want to be first, that is a conversation worth having.
+
+## A Frame, worked
+
+Below is a Frame of an example shop — nine things an owner would want to know on a Friday, each marked by how fresh its record is. The numbers are invented; the shape is not.

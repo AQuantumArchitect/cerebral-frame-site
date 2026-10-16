@@ -1,2 +1,2 @@
 import { markdownPage } from "../lib/md-page";
-export const GET = markdownPage("frame");
+export const GET = markdownPage("frame", "frame-after");

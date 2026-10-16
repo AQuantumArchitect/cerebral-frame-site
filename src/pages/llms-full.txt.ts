@@ -8,6 +8,7 @@ export const GET: APIRoute = () => {
   const siteYaml = fs.readFileSync(path.join(process.cwd(), "content/site.yaml"), "utf8");
   const scan = fs.readFileSync(path.join(process.cwd(), "content/scan-rules.yaml"), "utf8");
   const sample = fs.readFileSync(path.join(process.cwd(), "content/sample-friday.yaml"), "utf8");
+  const sampleFrame = fs.readFileSync(path.join(process.cwd(), "content/sample-frame.json"), "utf8");
   const links = fs.readFileSync(path.join(process.cwd(), "content/links.yaml"), "utf8");
   const booking = fs.readFileSync(path.join(process.cwd(), "content/booking.yaml"), "utf8");
   const body = `# Cerebral Frame — full content
@@ -24,6 +25,9 @@ ${scan}
 
 ## content/sample-friday.yaml
 ${sample}
+
+## content/sample-frame.json
+${sampleFrame}
 
 ## content/links.yaml
 ${links}

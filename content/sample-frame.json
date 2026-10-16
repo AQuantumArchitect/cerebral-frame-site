@@ -1,0 +1,105 @@
+{
+  "schema": "frame/1",
+  "subject": "Harbor Tool & Supply (example)",
+  "as_of": "2026-03-06T17:00:00Z",
+  "stale_after_s": 259200,
+  "law": "a value nobody measured is null and renders dark, never zero",
+  "producer": { "name": "cerebral-frame-site", "kind": "sample" },
+  "nodes": [
+    {
+      "id": "orders_week",
+      "label": "Orders this week",
+      "value": 41,
+      "unit": "orders",
+      "state": "current",
+      "age_s": 3600,
+      "source": "point-of-sale export",
+      "note": ""
+    },
+    {
+      "id": "late_jobs",
+      "label": "Late jobs",
+      "value": 3,
+      "unit": "jobs",
+      "state": "current",
+      "age_s": 7200,
+      "source": "job board",
+      "note": ""
+    },
+    {
+      "id": "cash_in",
+      "label": "Cash in",
+      "value": 18400,
+      "unit": "USD",
+      "state": "current",
+      "age_s": 72000,
+      "source": "bank feed",
+      "note": ""
+    },
+    {
+      "id": "cash_out",
+      "label": "Cash out",
+      "value": 12150,
+      "unit": "USD",
+      "state": "current",
+      "age_s": 72000,
+      "source": "bank feed",
+      "note": ""
+    },
+    {
+      "id": "special_order_blades",
+      "label": "Special-order blades",
+      "value": "2 on receiving bench",
+      "unit": "",
+      "state": "stale",
+      "age_s": 302400,
+      "source": "receiving log, last entry Tuesday",
+      "note": ""
+    },
+    {
+      "id": "friday_numbers_rebuilt",
+      "label": "Friday numbers rebuilt from",
+      "value": "3 spreadsheets",
+      "unit": "",
+      "state": "stale",
+      "age_s": 345600,
+      "source": "office manager, by hand",
+      "note": ""
+    },
+    {
+      "id": "vendor_backorders",
+      "label": "Vendor backorders",
+      "value": null,
+      "unit": "",
+      "state": "dark",
+      "age_s": null,
+      "source": "twelve inboxes; no single list yet",
+      "note": "the Build candidate"
+    },
+    {
+      "id": "saturday_counter_demand",
+      "label": "Saturday counter demand",
+      "value": null,
+      "unit": "",
+      "state": "dark",
+      "age_s": null,
+      "source": "never counted",
+      "note": "the decision waiting on a number"
+    },
+    {
+      "id": "willard_invoice",
+      "label": "Willard invoice",
+      "value": 640,
+      "unit": "USD",
+      "state": "stale",
+      "age_s": 3283200,
+      "source": "AR aging",
+      "note": "write off or send once more"
+    }
+  ],
+  "edges": [
+    { "from": "orders_week", "to": "cash_in", "rel": "feeds" },
+    { "from": "late_jobs", "to": "special_order_blades", "rel": "feeds" },
+    { "from": "vendor_backorders", "to": "late_jobs", "rel": "feeds" }
+  ]
+}

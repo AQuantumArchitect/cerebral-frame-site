@@ -6,10 +6,11 @@ import { marked } from "marked";
 const root = process.cwd();
 
 export interface Offer {
-  id: "audit" | "sprint" | "seat";
+  id: "map" | "build" | "hold";
   owner_name: string;
   typical: string;
   blurb: string;
+  deliverables: string;
 }
 
 export interface NavItem {
@@ -47,6 +48,8 @@ export interface Site {
   tertiary_cta: string;
   magnetic: string;
   ai_once: string;
+  frame_caption: string;
+  deliverables_label: string;
   offers: Offer[];
   nav: NavItem[];
 }
@@ -87,6 +90,37 @@ export interface FridaySample {
   already_handled: string[];
 }
 
+export type FrameState = "current" | "stale" | "dark";
+
+export interface FrameNode {
+  id: string;
+  label: string;
+  value: number | string | boolean | null;
+  unit?: string;
+  state: FrameState;
+  age_s: number | null;
+  stale_after_s?: number;
+  source: string;
+  note?: string;
+}
+
+export interface FrameEdge {
+  from: string;
+  to: string;
+  rel: string;
+}
+
+export interface FrameDoc {
+  schema: "frame/1";
+  subject: string;
+  as_of: string;
+  stale_after_s: number;
+  law: string;
+  producer: { name: string; kind: "engine" | "log" | "sample" | "instrument" };
+  nodes: FrameNode[];
+  edges?: FrameEdge[];
+}
+
 function read(rel: string): string {
   return fs.readFileSync(path.join(root, rel), "utf8");
 }
@@ -101,6 +135,10 @@ export function loadScanRules(): ScanRules {
 
 export function loadFriday(): FridaySample {
   return parseYaml(read("content/sample-friday.yaml")) as FridaySample;
+}
+
+export function loadSampleFrame(): FrameDoc {
+  return JSON.parse(read("content/sample-frame.json")) as FrameDoc;
 }
 
 export function loadLinks(): LinkTree {

@@ -21,12 +21,12 @@ ${s.offers.map((o) => `- ${o.owner_name} (${o.id}): ${o.typical}`).join("\n")}
 
 ## Pages
 - / Home
-- /frame What a Frame is: a belief graph over the company's own ledger
+- /frame What a Frame is: a belief graph over the company's own ledger. Sections: a worked sample Frame; how the Map runs day by day; questions owners ask; a link to our own live Frame
 - /work Offers: Map, Build, Hold
 - /about Luke Spooner and the outfit
 - /talk Call, email, book, form
 - /scan Where is the time going? (deterministic rules, no model)
-- /sample Example Friday picture
+- /sample Sample Frame (frame/1 document rendered; printable) plus the example Friday picture
 - /built-with How the site is built
 - /privacy /terms
 - /card.vcf

@@ -1,16 +1,22 @@
 ---
 import Base from "../layouts/Base.astro";
-import { loadSite, loadCopyHtml, telHref } from "../lib/site";
+import FrameView from "../components/FrameView.astro";
+import { loadSite, loadCopyHtml, loadSampleFrame, telHref } from "../lib/site";
 
 const site = loadSite();
 const html = loadCopyHtml("frame");
+const after = loadCopyHtml("frame-after");
+const frame = loadSampleFrame();
 ---
-<Base title={`The Frame · ${site.name}`} description="A live model of one company: a belief graph over your own records, with every number marked current, stale, or dark." path="/frame">
+<Base title={`The Frame · ${site.name}`} description="A live model of one company: a belief graph over your own records, with every number marked current, stale, or dark. A worked example, how the Map runs, and the questions owners ask." path="/frame">
   <div class="wrap">
     <div class="prose" set:html={html} />
+    <FrameView doc={frame} heading="p" />
+    <div class="prose" set:html={after} />
     <div class="actions no-print">
       <a class="btn" href={telHref(site.phone)}>{site.primary_cta}</a>
       <a class="btn btn-secondary" href="/work">See the three ways to hire us</a>
+      <a class="btn btn-ghost" href="/sample">Print the sample Frame</a>
     </div>
   </div>
 </Base>

@@ -61,6 +61,12 @@ respect `prefers-reduced-motion`.
   states are current / stale / dark — never show a zero for an unmeasured thing.
   No client Frame has shipped yet; say so where the offer is described.
 - Offers are Map / Build / Hold. Same names on /work, /scan, and the card.
+  Each offer has a `deliverables` line in `site.yaml`, rendered on /work.
+- Frame copy lives in two files: `content/copy/frame.md` (opening, ends with
+  the "A Frame, worked" heading) and `content/copy/frame-after.md` (the
+  paragraph after the rendered Frame, the day-by-day Map, owners' questions,
+  the live link). `frame.astro` renders md → FrameView → md. `/frame.md`
+  concatenates both.
 - Contact email for v1: `Somapptic@gmail.com` (temporary; `luke@cerebralframe.com` later).
 - Homepage may mention AI once, late, in owner language. Do not lead with
   “AI automation engineer.” Do not use “Fractional CTO” as H1.
@@ -72,6 +78,17 @@ memetic-weapons copy, hover-only nav, cookie walls, chat widgets, autoplay,
 stock handshakes, neuron logos, “Cerebral” alone, “Brain Frame.”
 
 Do not scrape resumes. Do not scrape Broadcast UI components.
+
+## FrameView
+
+`content/sample-frame.json` is a `frame/1` document (schema: subject, as_of,
+stale_after_s, producer, nodes[] with value/state/age_s/source/note, edges[]).
+A `null` value is dark; age within the threshold is current; past it is stale.
+`state` is written by the producer and must re-derive from age — check it when
+you edit the file. `src/components/FrameView.astro` renders any such document
+statically (no JS): `doc`, optional `compact` (five tiles, no sources),
+optional `heading` (h1 / h2 / p). Used on `/` (compact), `/frame`, `/sample`.
+Loader: `loadSampleFrame()` in `src/lib/site.ts`.
 
 ## Scan (`/scan`)
 

@@ -16,19 +16,24 @@ secondary_cta: See where the time is going
 tertiary_cta: Book 20 minutes
 magnetic: Cerebral Frame is a small, fast engineering outfit. We take the contract, build the thing, and hand you the keys — code, automation, and a Frame of your business that knows what it does not know.
 ai_once: We use AI the way a shop uses a lathe. It is a tool on the floor, not the name on the door.
+frame_caption: A Frame of an example shop. Five numbers, three states. Yours would be your numbers.
+deliverables_label: "What you get:"
 offers:
   - id: map
     owner_name: Map
     typical: "$5,000–$10,000"
     blurb: Two weeks inside your operation. You get a Frame of it — every number, hand-off, and pile, marked as current, stale, or dark — and a short list of what to build first.
+    deliverables: a Frame of the operation, a one-page short list, and the Map notes
   - id: build
     owner_name: Build
     typical: "$10,000–$30,000"
     blurb: One thing the Frame said was costing you, built and shipped. An automation, an integration, a tool your people actually open. Scoped in writing before a line is written.
+    deliverables: working software, shipped, with its own node on your Frame
   - id: hold
     owner_name: Hold
     typical: "$6,000–$15,000 / month"
     blurb: We stay on as your technical lead. The Frame stays live, the backlog has an owner, and the computer work stops being the owner's second job.
+    deliverables: a monthly Frame review, an owned backlog, and a phone number that answers
 nav:
   - { href: /frame, label: The Frame }
   - { href: /work, label: Work }

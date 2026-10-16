@@ -14,6 +14,7 @@ const html = loadCopyHtml("work");
           <h2>{offer.owner_name}</h2>
           <p class="price">{offer.typical}</p>
           <p>{offer.blurb}</p>
+          <p class="deliverables"><strong>{site.deliverables_label}</strong> {offer.deliverables}</p>
         </article>
       ))}
     </div>
