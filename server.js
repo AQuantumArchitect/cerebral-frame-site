@@ -27,7 +27,7 @@ const SECURITY = {
   "X-Frame-Options": "SAMEORIGIN",
   "Permissions-Policy": "camera=(self), microphone=(self), geolocation=()",
   "Content-Security-Policy":
-    "default-src 'self'; img-src 'self' data:; media-src 'self' blob:; style-src 'self' 'unsafe-inline'; script-src 'self'; frame-src https://calendly.com https://*.calendly.com; connect-src 'self'; font-src 'self' data:; base-uri 'self'; form-action 'self'",
+    "default-src 'self'; img-src 'self' data:; media-src 'self' blob:; style-src 'self' 'unsafe-inline'; script-src 'self'; frame-src https://calendly.com https://*.calendly.com; connect-src 'self' https://the-broadcast-production.up.railway.app https://log.cerebralframe.com; font-src 'self' data:; base-uri 'self'; form-action 'self'",
 };
 
 const MIME = {

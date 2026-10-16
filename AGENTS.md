@@ -61,7 +61,18 @@ respect `prefers-reduced-motion`.
   states are current / stale / dark — never show a zero for an unmeasured thing.
   No client Frame has shipped yet; say so where the offer is described.
 - Offers are Map / Build / Hold. Same names on /work, /scan, and the card.
-  Each offer has a `deliverables` line in `site.yaml`, rendered on /work.
+  Each offer has `for`, `weeks`, `start`, `blurb`, and `deliverables` in
+  `site.yaml`, rendered as full sections on /work and composed into `/work.md`.
+- Locked (Luke, 2026-10-16): every engagement starts with a **$400 half-day
+  consultation, in person when we can** (`consultation:` in `site.yaml`). It
+  yields a written proposal with deliverables, a price from the ranges, and
+  the three payment points. Payment is **in thirds**: signing, delivery,
+  acceptance (`payment_terms:`). Prices are typical ranges; the proposal is
+  the quote. Contract engineering ("hire Luke") goes through the same door:
+  consultation → proposal → Build or Hold; day rates are quoted in the
+  proposal, never on the site. /scan's first step names the consultation
+  (`first_step:` in `scan-rules.yaml`). `terms.md` repeats the thirds in
+  legal prose; keep the two in step.
 - Frame copy lives in two files: `content/copy/frame.md` (opening, ends with
   the "A Frame, worked" heading) and `content/copy/frame-after.md` (the
   paragraph after the rendered Frame, the day-by-day Map, owners' questions,
@@ -86,9 +97,25 @@ stale_after_s, producer, nodes[] with value/state/age_s/source/note, edges[]).
 A `null` value is dark; age within the threshold is current; past it is stale.
 `state` is written by the producer and must re-derive from age — check it when
 you edit the file. `src/components/FrameView.astro` renders any such document
-statically (no JS): `doc`, optional `compact` (five tiles, no sources),
+statically (no JS; its CSS is global in `src/styles/frame.css` so /case can
+share it): `doc`, optional `compact` (five tiles, no sources),
 optional `heading` (h1 / h2 / p). Used on `/` (compact), `/frame`, `/sample`.
 Loader: `loadSampleFrame()` in `src/lib/site.ts`.
+
+## Case (`/case`)
+
+"Our own operation, live." The second and last page allowed a script
+(`src/scripts/case.ts`): a read-only `fetch` of one public URL, the log's
+`frame/1` document (`case.source` in `site.yaml`), drawn with the shared
+Frame grammar in `src/styles/frame.css`. No model, no tracking, no cookies,
+no storage, no credentials. The renderer may reshape a node and never
+promote one: a producer's stale or dark stands; a producer's current is
+demoted when its own age is past the threshold. If the fetch fails or JS is
+off, the static block stays — dark, not an error — with a plain link to the
+log's Engine page. `server.js` CSP `connect-src` allows the two log hosts.
+Nav: not in it; linked from /frame, the home caption, the footer, and
+`llms.txt`. Nav's last item is the log itself (`external: true` opens a
+new tab).
 
 ## Scan (`/scan`)
 

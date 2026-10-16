@@ -26,4 +26,8 @@ Read it the way the owner would. The **current** tiles are the ones you run the 
 
 ## See a live one
 
-The Frame of our own company runs in public on [the engine page of our log](https://the-broadcast-production.up.railway.app/#/engine). As of this writing it reads stale in places. That is the point: it says so.
+The Frame of our own company is read live from the machine that runs our operation, on [our own operation, live](/case). As of this writing it reads stale and dark in most places. That is the point: it says so.
+
+## What it costs
+
+Every engagement starts with a $400 half-day consultation, in person when we can, and ends that week with a written proposal — deliverables, a price, and the three payment points attached to them. A Map is typically $5,000–$10,000; a Build $10,000–$30,000; a Hold $6,000–$15,000 a month. Paid in thirds: signing, delivery, acceptance. The whole of it is on the [Offers page](/work).

@@ -103,7 +103,8 @@ const offerNames = {
       resultEl.innerHTML = `
         <p>${result.paragraph}</p>
         <p class="hours">${result.annualHours} hours a year</p>
-        <p><strong>First step:</strong> ${offers[result.recommend]}. ${result.why}</p>
+        <p><strong>First step:</strong> ${rules.first_step}</p>
+        <p><strong>Then:</strong> ${offers[result.recommend]}. ${result.why}</p>
         ${seat}
         <div class="actions">
           <a class="btn" href="tel:+18052368182">Call with this in front of you</a>

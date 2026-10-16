@@ -9,6 +9,9 @@ export interface Offer {
   id: "map" | "build" | "hold";
   owner_name: string;
   typical: string;
+  for: string;
+  weeks: string;
+  start: string;
   blurb: string;
   deliverables: string;
 }
@@ -16,6 +19,44 @@ export interface Offer {
 export interface NavItem {
   href: string;
   label: string;
+  external?: boolean;
+}
+
+export interface Consultation {
+  price: string;
+  length: string;
+  where: string;
+  yields: string;
+  happens: string;
+  gets: string;
+  book_via: string;
+  talk_heading: string;
+  talk_lead: string;
+}
+
+export interface CaseConfig {
+  source: string;
+  engine: string;
+  log: string;
+  subject: string;
+  kicker: string;
+  reading: string;
+  unreachable: string;
+  engine_link: string;
+  ago: string;
+}
+
+export interface Labels {
+  start_here: string;
+  what_happens: string;
+  what_you_get: string;
+  for: string;
+  weeks: string;
+  typical: string;
+  start: string;
+  paying: string;
+  book: string;
+  offers_kicker: string;
 }
 
 export interface LinkItem {
@@ -49,7 +90,13 @@ export interface Site {
   magnetic: string;
   ai_once: string;
   frame_caption: string;
+  case_caption: string;
   deliverables_label: string;
+  labels: Labels;
+  consultation: Consultation;
+  case: CaseConfig;
+  payment_terms: string;
+  pricing_note: string;
   offers: Offer[];
   nav: NavItem[];
 }
@@ -70,6 +117,7 @@ export interface ScanRules {
   title: string;
   intro: string;
   questions: ScanQuestion[];
+  first_step: string;
   offers: Record<string, { owner_name: string; why: string }>;
 }
 

@@ -16,7 +16,12 @@ const site = loadSite();
     </a>
     <nav class="nav" aria-label="Primary">
       {site.nav.map((item) => (
-        <a href={item.href} aria-current={path === item.href ? "page" : undefined}>
+        <a
+          href={item.href}
+          aria-current={path === item.href ? "page" : undefined}
+          target={item.external ? "_blank" : undefined}
+          rel={item.external ? "noopener" : undefined}
+        >
           {item.label}
         </a>
       ))}

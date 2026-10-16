@@ -42,6 +42,7 @@ questions:
       - { value: office-manager, label: Office manager }
       - { value: whoever, label: Whoever is free }
       - { value: outside, label: Outside bookkeeper or IT }
+first_step: A $400 half-day consultation, in person when we can, and a written proposal within the week. The proposal names the price and the three payment points; the offer below is what it would usually name.
 offers:
   audit:
     owner_name: Map
