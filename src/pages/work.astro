@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+import TrustCallout from "../components/TrustCallout.astro";
 import { loadSite, loadCopyHtml } from "../lib/site";
 
 const site = loadSite();
@@ -11,6 +12,7 @@ const L = site.labels;
 <Base title={`Offers · ${site.name}`} description={`Every engagement starts with a ${c.price} half-day consultation and a written proposal. Then Map, Build, or Hold — typical ranges, paid in thirds against the deliverables.`} path="/work">
   <div class="wrap">
     <div class="prose" set:html={html} />
+    <TrustCallout />
 
     <section class="consult card" id="consultation" aria-labelledby="consult-h">
       <h2 id="consult-h">{L.start_here}</h2>

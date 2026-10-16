@@ -1,0 +1,384 @@
+---
+// /onepager — the print artifact for the walk-in lane. Two sides: the Frame
+// and its three states on the front; Map / Build / Hold, thirds, and the
+// phone number on the back. Printed, it drops the header, nav, and footer
+// and breaks between the two sides. It names no city: the reader is
+// standing where it was handed over. All sentences come from content/.
+import Base from "../layouts/Base.astro";
+import FrameView from "../components/FrameView.astro";
+import PrintButton from "../components/PrintButton.astro";
+import TrustCallout from "../components/TrustCallout.astro";
+import { loadSite, loadCopyHtml, loadSampleFrame, telHref } from "../lib/site";
+
+const site = loadSite();
+const front = loadCopyHtml("onepager-front");
+const back = loadCopyHtml("onepager-back");
+const frame = loadSampleFrame();
+const op = site.onepager;
+const L = site.labels;
+const host = site.url.replace(/^https?:\/\//, "").replace(/\/$/, "");
+---
+<Base title={`${op.title} · ${site.name}`} description={`${site.hero_h1} The Frame, its three states, the three offers with prices, and the phone number — on two printable sides.`} path="/onepager">
+  <div class="wrap onepager">
+    <div class="actions no-print">
+      <PrintButton label="Print the one-pager" />
+      <a class="btn btn-ghost" href="/work">The Offers page</a>
+    </div>
+
+    <article class="sheet sheet-front" aria-label={op.front_side}>
+      <p class="side no-print">{op.front_side}</p>
+      <header class="sheet-head">
+        <span class="wordmark-print"><span class="frame-mark" aria-hidden="true"></span>{site.name}</span>
+        <a class="phone-big" href={telHref(site.phone)}>{site.phone_display}</a>
+      </header>
+      <div class="prose" set:html={front} />
+      <ul class="states" aria-label="The three states">
+        {op.front_states.map((s) => (
+          <li class:list={["state", `is-${s.state}`]}>
+            <span class:list={["badge", `badge-${s.state}`]}>{s.state}</span>
+            <span class="state-line">{s.line}</span>
+          </li>
+        ))}
+      </ul>
+      <FrameView doc={frame} compact heading="p" />
+      <section class="start">
+        <p class="start-line">{op.start}</p>
+        <p class="start-note">{op.start_note}</p>
+      </section>
+      <footer class="sheet-foot">
+        <span>{host}/work</span>
+        <span>{site.phone_display}</span>
+      </footer>
+    </article>
+
+    <article class="sheet sheet-back" aria-label={op.back_side}>
+      <p class="side no-print">{op.back_side}</p>
+      <div class="prose" set:html={back} />
+      <section class="consult" aria-labelledby="op-consult-h">
+        <h2 id="op-consult-h">{L.start_here}</h2>
+        <p><span class="price">{site.consultation.price}</span> · {site.consultation.length} · {site.consultation.where}</p>
+        <p class="muted">{site.consultation.gets}</p>
+      </section>
+      <p class="eyebrow">{op.then}</p>
+      <ul class="offers" aria-label="Offers">
+        {site.offers.map((o) => (
+          <li class="offer">
+            <h2>{o.owner_name}</h2>
+            <p class="offer-for">{o.for}</p>
+            <p class="offer-gets"><strong>{L.what_you_get}:</strong> {o.deliverables}</p>
+            <p class="offer-facts"><span>{o.weeks}</span><span class="price">{o.typical}</span></p>
+          </li>
+        ))}
+      </ul>
+      <section class="paying" aria-labelledby="op-paying-h">
+        <h2 id="op-paying-h">{op.paying_label}</h2>
+        <p>{site.payment_terms}</p>
+      </section>
+      <TrustCallout heading="h2" />
+      <section class="contact" aria-label="Contact">
+        <p class="contact-row"><span class="contact-label">{op.call_label}</span><a class="phone-big" href={telHref(site.phone)}>{site.phone_display}</a></p>
+        <p class="contact-row"><span class="contact-label">{op.email_label}</span><a href={`mailto:${site.email}`}>{site.email}</a></p>
+        <p class="contact-row"><span class="contact-label">{op.web_label}</span><a href={site.url}>{host}</a></p>
+        <p class="contact-person">{site.person} · {site.name}</p>
+      </section>
+    </article>
+
+    <div class="actions no-print">
+      <PrintButton label="Print the one-pager" />
+      <a class="btn btn-secondary" href="/talk">{site.tertiary_cta}</a>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .sheet {
+    position: relative;
+    background: var(--card);
+    border: 1px solid var(--rule);
+    padding: 1.5rem;
+    max-width: 56rem;
+    margin: 0 0 1.5rem;
+  }
+
+  .side {
+    position: absolute;
+    top: -0.75rem;
+    left: 1rem;
+    margin: 0;
+    padding: 0 0.5rem;
+    background: var(--paper);
+    color: var(--ink-soft);
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .sheet-head,
+  .sheet-foot {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.5rem 1.5rem;
+  }
+
+  .sheet-head {
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 0.6rem;
+    margin-bottom: 1rem;
+  }
+
+  .sheet-foot {
+    border-top: 1px solid var(--rule);
+    padding-top: 0.6rem;
+    margin-top: 1.25rem;
+    color: var(--ink-soft);
+    font-weight: 600;
+  }
+
+  .wordmark-print {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 1.25rem;
+  }
+
+  .phone-big {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 1.6rem;
+    color: var(--ink);
+    text-decoration: none;
+    white-space: nowrap;
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .phone-big:hover {
+    color: var(--accent);
+  }
+
+  .sheet :global(.prose h1) {
+    font-size: 2.1rem;
+    margin: 0 0 0.6rem;
+  }
+
+  .sheet :global(.prose p) {
+    margin: 0 0 0.75rem;
+  }
+
+  .states {
+    list-style: none;
+    padding: 0;
+    margin: 0.75rem 0 0;
+    display: grid;
+    gap: 0.4rem;
+    max-width: var(--measure);
+  }
+
+  .state {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    padding-left: 0.75rem;
+    border-left: 4px solid var(--rule);
+  }
+
+  .state.is-current {
+    border-left-color: var(--ok);
+  }
+
+  .state.is-stale {
+    border-left-color: var(--warn);
+  }
+
+  .state.is-dark {
+    border-left-style: dashed;
+    border-left-color: var(--ink-soft);
+  }
+
+  .state .badge {
+    min-width: 5.5rem;
+    text-align: center;
+  }
+
+  .start {
+    border: 2px solid var(--ink);
+    padding: 1rem 1.25rem;
+    margin: 0.25rem 0 0;
+    max-width: var(--measure);
+  }
+
+  .start-line {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 1.4rem;
+    line-height: 1.25;
+    margin: 0 0 0.35rem;
+  }
+
+  .start-note,
+  .muted {
+    margin: 0;
+    color: var(--ink-soft);
+  }
+
+  .consult {
+    border: 2px solid var(--ink);
+    padding: 1rem 1.25rem;
+    margin: 0 0 1.25rem;
+    max-width: var(--measure);
+  }
+
+  .consult h2,
+  .offer h2,
+  .paying h2 {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    margin: 0 0 0.3rem;
+  }
+
+  .consult p {
+    margin: 0.2rem 0;
+  }
+
+  .eyebrow {
+    margin: 0 0 0.5rem;
+  }
+
+  .offers {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.25rem;
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  }
+
+  .offer {
+    border: 1px solid var(--rule);
+    padding: 0.9rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .offer p {
+    margin: 0;
+  }
+
+  .offer-for {
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+  }
+
+  .offer-gets {
+    font-size: 0.95rem;
+  }
+
+  .offer-facts {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    border-top: 1px solid var(--rule);
+    padding-top: 0.5rem;
+    margin-top: auto !important;
+    font-weight: 600;
+  }
+
+  .paying {
+    border-top: 2px solid var(--ink);
+    padding-top: 0.6rem;
+    max-width: var(--measure);
+  }
+
+  .paying p {
+    margin: 0;
+  }
+
+  .contact {
+    border-top: 2px solid var(--ink);
+    padding-top: 0.75rem;
+    margin-top: 0.5rem;
+  }
+
+  .contact-row {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin: 0.2rem 0;
+  }
+
+  .contact-label {
+    min-width: 3.5rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 600;
+  }
+
+  .contact .phone-big {
+    font-size: 2.2rem;
+  }
+
+  .contact-person {
+    margin: 0.5rem 0 0;
+    color: var(--ink-soft);
+  }
+
+  @media print {
+    .sheet {
+      border: 0;
+      padding: 0;
+      margin: 0;
+      max-width: none;
+      background: #fff;
+    }
+
+    .sheet-front {
+      break-after: page;
+      page-break-after: always;
+    }
+
+    .phone-big,
+    .contact .phone-big {
+      font-size: 24pt;
+    }
+
+    .sheet :global(.prose h1) {
+      font-size: 26pt;
+    }
+
+    .start-line {
+      font-size: 16pt;
+    }
+
+    .offers {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .offer,
+    .consult,
+    .start,
+    .paying,
+    .contact {
+      break-inside: avoid;
+    }
+  }
+</style>
+
+<style is:global>
+  /* The one-pager is its own letterhead: no site header, nav, or footer in
+     print. This page-level global style ships only with /onepager. */
+  @media print {
+    .site-header,
+    .site-footer {
+      display: none !important;
+    }
+  }
+</style>

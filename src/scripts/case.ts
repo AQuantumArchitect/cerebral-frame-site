@@ -80,7 +80,43 @@ function stateOf(n: RawNode, ageS: number | null, threshold: number): State {
   return given ?? (ageS === null ? "stale" : "current");
 }
 
-export function render(raw: RawDoc, cfg: { subject: string; kicker: string; ago: string }): HTMLElement {
+export interface RenderConfig {
+  subject: string;
+  kicker: string;
+  ago: string;
+  reportLabel: string;
+  reportNone: string;
+  stalePrefix: string;
+}
+
+// The honesty badge: when the machine last reported, and how long ago.
+// Derived from the document's as_of, falling back to the freshest node age
+// when as_of is missing. Past seven days it is prefixed "stale — ".
+// It is never hidden.
+export const REPORT_STALE_S = 7 * 86400;
+
+export function reportLine(
+  asOf: Date | null,
+  ages: (number | null)[],
+  cfg: Pick<RenderConfig, "reportLabel" | "reportNone" | "stalePrefix" | "ago">,
+  now = Date.now(),
+): { text: string; stale: boolean } {
+  let since: number | null = null;
+  let when = "—";
+  if (asOf && Number.isFinite(asOf.getTime())) {
+    since = Math.max(0, Math.round((now - asOf.getTime()) / 1000));
+    when = new Intl.DateTimeFormat("en-US", { year: "numeric", month: "short", day: "numeric", timeZone: "UTC" }).format(asOf);
+  } else {
+    const known = ages.filter((a): a is number => typeof a === "number" && Number.isFinite(a));
+    if (known.length > 0) since = Math.min(...known);
+  }
+  if (since === null) return { text: `${cfg.reportLabel}: ${cfg.reportNone}`, stale: false };
+  const stale = since > REPORT_STALE_S;
+  const prefix = stale ? cfg.stalePrefix : "";
+  return { text: `${prefix}${cfg.reportLabel}: ${when} (${age(since)} ${cfg.ago})`, stale };
+}
+
+export function render(raw: RawDoc, cfg: RenderConfig): HTMLElement {
   const doc = raw.frame ?? raw;
   const asOf = doc.as_of ? new Date(doc.as_of) : null;
   const asOfOk = asOf !== null && Number.isFinite(asOf.getTime());
@@ -102,6 +138,11 @@ export function render(raw: RawDoc, cfg: { subject: string; kicker: string; ago:
 
   const section = el("section", "frame-view");
   section.setAttribute("aria-label", `Frame of ${doc.subject ?? cfg.subject}`);
+
+  const report = reportLine(asOfOk ? (asOf as Date) : null, rows.map((r) => r.a), cfg);
+  const badge = el("p", report.stale ? "frame-report is-stale" : "frame-report", report.text);
+  badge.setAttribute("data-case-report", "");
+  section.append(badge);
 
   const head = el("header", "frame-head");
   const left = el("div");
@@ -169,10 +210,13 @@ export function render(raw: RawDoc, cfg: { subject: string; kicker: string; ago:
 
 const root = document.getElementById("case-frame");
 if (root && root.dataset.src) {
-  const cfg = {
+  const cfg: RenderConfig = {
     subject: root.dataset.subject ?? "",
     kicker: root.dataset.kicker ?? "",
     ago: root.dataset.ago ?? "ago",
+    reportLabel: root.dataset.reportLabel ?? "Last machine report",
+    reportNone: root.dataset.reportNone ?? "none received yet",
+    stalePrefix: root.dataset.stalePrefix ?? "stale — ",
   };
   const status = root.querySelector<HTMLElement>("[data-case-status]");
   if (status) status.textContent = root.dataset.reading ?? "";

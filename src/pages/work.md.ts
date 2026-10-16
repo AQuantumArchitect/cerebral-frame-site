@@ -17,6 +17,7 @@ export const GET: APIRoute = () => {
     .join("\n\n");
   const body =
     `# ${site.name}\n\n${loadCopyRaw("work").trim()}\n\n` +
+    `## ${site.trust.heading}\n\n${site.trust.text}\n\n` +
     `## ${L.start_here}\n\n${c.price} · ${c.length} · ${c.where}\n\n` +
     `${L.what_happens}: ${c.happens}\n\n${L.what_you_get}: ${c.gets}\n\n${c.book_via}\n\n` +
     `${offers}\n\n## ${L.paying}\n\n${site.payment_terms}\n\n${site.pricing_note}\n\n` +

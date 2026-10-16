@@ -23,8 +23,12 @@ const after = cut === -1 ? "" : html.slice(cut);
       data-kicker={cs.kicker}
       data-reading={cs.reading}
       data-ago={cs.ago}
+      data-report-label={cs.report_label}
+      data-report-none={cs.report_none}
+      data-stale-prefix={cs.report_stale_prefix}
     >
       <section class="frame-view" aria-label={`Frame of ${cs.subject}`}>
+        <p class="frame-report" data-case-report>{cs.report_label}: {cs.report_none}</p>
         <header class="frame-head">
           <div>
             <p class="frame-kicker">{cs.kicker}</p>

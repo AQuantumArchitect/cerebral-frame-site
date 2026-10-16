@@ -14,7 +14,10 @@ Place: ${s.city} · ${s.region}
 Person: ${s.person}
 
 ## Who it is for
-Owners and operators of small and mid-size companies who want the computer work built properly and a live model of the business — a Frame — that marks every number current, stale, or dark.
+Owners and operators of small and mid-size companies who want the computer work built properly and a live model of the business — a Frame — that marks every number current, stale, or dark. Two kinds of company: the shop down the road, where we walk the floor, and the operation anywhere, where we work remote and fly in when it matters. Same Frame, same prices. No client Frame has shipped yet.
+
+## ${s.trust.heading}
+${s.trust.text}
 
 ## Offers (typical ranges, not quotes; the proposal is the quote)
 - Consultation first: ${s.consultation.price}, ${s.consultation.length}, ${s.consultation.where}. Yields ${s.consultation.yields}.
@@ -30,6 +33,7 @@ ${s.offers.map((o) => `- ${o.owner_name} (${o.id}): ${o.typical} · ${o.weeks} �
 - /talk Call, email, book, form
 - /scan Where is the time going? (deterministic rules, no model)
 - /sample Sample Frame (frame/1 document rendered; printable) plus the example Friday picture
+- /onepager The one-pager: two printable sides — the Frame and its three states; Map / Build / Hold with prices, thirds, phone. Made to hand across a counter
 - /built-with How the site is built
 - /privacy /terms
 - /card.vcf
