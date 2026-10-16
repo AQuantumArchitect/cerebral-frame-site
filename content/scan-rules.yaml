@@ -42,13 +42,14 @@ questions:
       - { value: office-manager, label: Office manager }
       - { value: whoever, label: Whoever is free }
       - { value: outside, label: Outside bookkeeper or IT }
+first_step: A $400 half-day consultation, in person when we can, and a written proposal within the week. The proposal names the price and the three payment points; the offer below is what it would usually name.
 offers:
   audit:
-    owner_name: A look under the hood
-    why: Start by sitting with how the week actually runs, before buying a fix.
+    owner_name: Map
+    why: Start with a Frame of how the week actually runs, before buying a fix.
   sprint:
-    owner_name: One problem, fixed
-    why: The hours and the owner-load are high enough that one stuck process is worth taking off the plate.
+    owner_name: Build
+    why: The hours and the owner-load are high enough that one stuck process is worth taking off the plate and shipping as software.
   seat:
-    owner_name: A part-time technical lead
-    why: After the first fix, the computer work still needs an owner who is not also running the floor.
+    owner_name: Hold
+    why: After the first build, the computer work still needs an owner who is not also running the floor.

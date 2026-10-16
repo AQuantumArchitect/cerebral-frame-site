@@ -3,33 +3,83 @@ person: Luke Spooner
 phone: "+1-805-236-8182"
 phone_display: "(805) 236-8182"
 email: Somapptic@gmail.com
-city: Camarillo, CA
-region: Ventura County
+city: Works anywhere
+region: United States · remote by default, on site when it matters
 url: https://cerebralframe.com
 calendly: ""
 github: https://github.com/AQuantumArchitect/cerebral-frame-site
-eyebrow: Camarillo · Ventura County · remote when it helps
-hero_h1: Get the computer work off your plate.
-hero_lead: Cerebral Frame helps small shops, plants, and offices stop running the business out of inboxes and spreadsheets.
+eyebrow: Code · automation · belief graphs — for small and mid-size companies
+hero_h1: Your business, as a live map.
+hero_lead: Cerebral Frame builds the software and automation a company needs, and the one thing it has never had — a Frame. A model of the operation that shows what is true today, what has gone stale, and what nobody is measuring.
 primary_cta: Call (805) 236-8182
 secondary_cta: See where the time is going
 tertiary_cta: Book 20 minutes
-magnetic: Cerebral Frame helps owners of small local companies get the computer work out of the way — so the shop runs on a short list and a weekly picture, not a pile of email.
-ai_once: If a simple software helper is the right tool, we use it. If a spreadsheet is the right tool, we use that.
+magnetic: Cerebral Frame is a small, fast engineering outfit. We take the contract, build the thing, and hand you the keys — code, automation, and a Frame of your business that knows what it does not know.
+ai_once: We use AI the way a shop uses a lathe. It is a tool on the floor, not the name on the door.
+frame_caption: A Frame of an example shop. Five numbers, three states. Yours would be your numbers.
+case_caption: Or see ours, live.
+deliverables_label: "What you get:"
+labels:
+  start_here: "Start here: the consultation"
+  what_happens: "What happens"
+  what_you_get: "What you get"
+  for: "For"
+  weeks: "Weeks"
+  typical: "Typical price"
+  start: "Start"
+  paying: "How paying works"
+  book: "Book the consultation"
+  offers_kicker: "Then one of three"
+consultation:
+  price: "$400"
+  length: "half day"
+  where: "in person when we can, by video when we cannot"
+  yields: "a written proposal with deliverables, a price from the ranges below, and the three payment points attached to those deliverables"
+  happens: "We walk the operation — the actual inbox, the actual spreadsheet, the person who just knows — and name the piles. You leave with a Frame sketch on one page."
+  gets: "A proposal within a week: deliverables, a price from the ranges below, and the three payment points attached to those deliverables."
+  book_via: "Book it on the Talk page. The twenty-minute call is where we pick the day and the place."
+  talk_heading: "Book the half-day consultation — $400, in person when we can"
+  talk_lead: "Every engagement starts here. Half a day inside your operation; a written proposal within a week. Start with the twenty-minute call below — that is where we pick the day and the place."
+case:
+  source: "https://the-broadcast-production.up.railway.app/api/frame"
+  engine: "https://the-broadcast-production.up.railway.app/#/engine"
+  log: "https://the-broadcast-production.up.railway.app/"
+  subject: "Cerebral Frame — our own operation"
+  kicker: "read live from the log"
+  reading: "Reading the log."
+  unreachable: "This Frame is read live from the log, and the log could not be reached right now. That makes it dark, not broken: a Frame that cannot see its source says so."
+  engine_link: "Open the Engine page on the log"
+  ago: "ago"
+payment_terms: "One third on signing. One third on delivery. One third on acceptance — you say when it is done, against the deliverables we wrote down."
+pricing_note: "Prices are typical ranges, not quotes; the proposal is the quote."
 offers:
-  - id: audit
-    owner_name: A look under the hood
-    typical: "$4,000–$8,000"
-    blurb: We sit with how the week actually runs, name the pile, and hand you a short list.
-  - id: sprint
-    owner_name: One problem, fixed
-    typical: "$8,000–$25,000"
-    blurb: One stuck process, taken off your plate and put on a weekly picture.
-  - id: seat
-    owner_name: A part-time technical lead
+  - id: map
+    owner_name: Map
+    for: Companies that know the week is leaking and do not yet know where.
+    weeks: "2 weeks"
+    start: after the consultation
+    typical: "$5,000–$10,000"
+    blurb: Two weeks inside your operation. You get a Frame of it — every number, hand-off, and pile, marked as current, stale, or dark — and a short list of what to build first.
+    deliverables: a Frame of the operation, a one-page short list, and the Map notes
+  - id: build
+    owner_name: Build
+    for: Companies with one named problem — from the Map, or from years of living with it.
+    weeks: "3–8 weeks, scoped"
+    start: after the consultation
+    typical: "$10,000–$30,000"
+    blurb: One thing the Frame said was costing you, built and shipped. An automation, an integration, a tool your people actually open. Scoped in writing before a line is written.
+    deliverables: working software, shipped, with its own node on your Frame
+  - id: hold
+    owner_name: Hold
+    for: Companies whose computer work needs an owner who is not also running the floor.
+    weeks: "monthly, cancel with 30 days"
+    start: after the consultation
     typical: "$6,000–$15,000 / month"
-    blurb: Someone who owns the computer work so you can own the shop.
+    blurb: We stay on as your technical lead. The Frame stays live, the backlog has an owner, and the computer work stops being the owner's second job.
+    deliverables: a monthly Frame review, an owned backlog, and a phone number that answers
 nav:
+  - { href: /frame, label: The Frame }
   - { href: /work, label: Work }
   - { href: /about, label: About }
   - { href: /talk, label: Talk }
+  - { href: "https://the-broadcast-production.up.railway.app/", label: The log, external: true }

@@ -4,18 +4,145 @@ import { loadSite, loadCopyHtml } from "../lib/site";
 
 const site = loadSite();
 const html = loadCopyHtml("work");
+const after = loadCopyHtml("work-after");
+const c = site.consultation;
+const L = site.labels;
 ---
-<Base title={`Work · ${site.name}`} description="Typical work: a look under the hood, one problem fixed, or a part-time technical lead." path="/work">
+<Base title={`Offers · ${site.name}`} description={`Every engagement starts with a ${c.price} half-day consultation and a written proposal. Then Map, Build, or Hold — typical ranges, paid in thirds against the deliverables.`} path="/work">
   <div class="wrap">
     <div class="prose" set:html={html} />
-    <div class="cards">
+
+    <section class="consult card" id="consultation" aria-labelledby="consult-h">
+      <h2 id="consult-h">{L.start_here}</h2>
+      <p class="price">{c.price} · {c.length} · {c.where}</p>
+      <h3>{L.what_happens}</h3>
+      <p>{c.happens}</p>
+      <h3>{L.what_you_get}</h3>
+      <p>{c.gets}</p>
+      <p class="deliverables">{c.book_via}</p>
+      <div class="actions">
+        <a class="btn" href="/talk#consult">{L.book}</a>
+      </div>
+    </section>
+
+    <p class="eyebrow offers-kicker">{L.offers_kicker}</p>
+    <div class="offers">
       {site.offers.map((offer) => (
-        <article class="card">
-          <h2>{offer.owner_name}</h2>
-          <p class="price">{offer.typical}</p>
+        <section class="offer" id={offer.id} aria-labelledby={`offer-${offer.id}`}>
+          <h2 id={`offer-${offer.id}`}>{offer.owner_name}</h2>
+          <p class="offer-for"><strong>{L.for}:</strong> {offer.for}</p>
+          <h3>{L.what_happens}</h3>
           <p>{offer.blurb}</p>
-        </article>
+          <dl class="offer-facts">
+            <div><dt>{L.weeks}</dt><dd>{offer.weeks}</dd></div>
+            <div><dt>{L.what_you_get}</dt><dd>{offer.deliverables}</dd></div>
+            <div><dt>{L.typical}</dt><dd class="price">{offer.typical}</dd></div>
+            <div><dt>{L.start}</dt><dd>{offer.start}</dd></div>
+          </dl>
+        </section>
       ))}
+    </div>
+
+    <section class="prose paying" id="paying" aria-labelledby="paying-h">
+      <h2 id="paying-h">{L.paying}</h2>
+      <p>{site.payment_terms}</p>
+      <p>{site.pricing_note}</p>
+    </section>
+
+    <div class="prose" set:html={after} />
+
+    <div class="actions no-print">
+      <a class="btn" href="/talk#consult">{L.book}</a>
+      <a class="btn btn-secondary" href="/frame">What a Frame is</a>
     </div>
   </div>
 </Base>
+
+<style>
+  .consult {
+    max-width: var(--measure);
+    border: 2px solid var(--ink);
+    margin: 1.5rem 0 2.5rem;
+  }
+
+  .consult h3,
+  .offer h3 {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 1.25rem 0 0.25rem;
+  }
+
+  .consult p,
+  .offer p {
+    margin: 0.25rem 0;
+  }
+
+  .consult .actions {
+    margin: 1.25rem 0 0;
+  }
+
+  .offers-kicker {
+    margin: 0 0 0.5rem;
+  }
+
+  .offers {
+    display: grid;
+    gap: 1rem;
+    margin: 0 0 2rem;
+  }
+
+  .offer {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    padding: 1.25rem;
+    max-width: 56rem;
+  }
+
+  .offer h2 {
+    font-family: var(--font-serif);
+    margin: 0 0 0.25rem;
+  }
+
+  .offer-for {
+    color: var(--ink-soft);
+  }
+
+  .offer-facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: 0.75rem 1.5rem;
+    margin: 1.25rem 0 0;
+    border-top: 1px solid var(--rule);
+    padding-top: 0.75rem;
+  }
+
+  .offer-facts div {
+    margin: 0;
+  }
+
+  .offer-facts dt {
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  .offer-facts dd {
+    margin: 0.15rem 0 0;
+  }
+
+  .paying {
+    border-top: 2px solid var(--ink);
+    padding-top: 0.5rem;
+  }
+
+  @media print {
+    .consult,
+    .offer {
+      break-inside: avoid;
+    }
+  }
+</style>

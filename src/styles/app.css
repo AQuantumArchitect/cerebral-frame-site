@@ -527,6 +527,11 @@ a:hover {
     width: 100%;
     justify-content: space-between;
   }
+
+  .nav a {
+    padding: 0 0.4rem;
+    font-size: 1rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -535,4 +540,38 @@ a:hover {
     transition: none !important;
     scroll-behavior: auto !important;
   }
+}
+
+.frame-caption {
+  margin: -0.5rem 0 2rem;
+}
+
+.frame-caption a {
+  color: var(--ink-soft);
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.deliverables {
+  border-top: 1px solid var(--rule);
+  padding-top: 0.75rem;
+  margin-bottom: 0;
+  color: var(--ink-soft);
+  font-size: 1rem;
+}
+
+.prose table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.95rem;
+  margin: 1rem 0;
+}
+
+.prose th,
+.prose td {
+  text-align: left;
+  border-bottom: 1px solid var(--rule);
+  padding: 0.5rem 0.6rem 0.5rem 0;
+  vertical-align: top;
 }

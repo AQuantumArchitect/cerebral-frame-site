@@ -2,7 +2,7 @@ This page is for people who care how the shop is wired. If you just want help wi
 
 ## Stack
 
-Astro 5. Pages are documents. The scan tool is a small script on one page, not a sitewide app. Railway hosts it. No database is required for the public site.
+Astro 5. Pages are documents. Two pages carry a small script — the scan tool, and the live Frame of our own operation — not a sitewide app. Railway hosts it. No database is required for the public site.
 
 Content is markdown and YAML. Changing an offer is a file, not a redesign. Booking is our own slot list plus an .ics email, not Calendly. A phone can leave a 20-second video on /talk.
 
@@ -11,6 +11,20 @@ Content is markdown and YAML. Changing an offer is a file, not a redesign. Booki
 Five questions. A pure function in `src/lib/scan.ts` turns the answers into a paragraph, an annual-hours number, and a first offer. No model is called on the public page. The same result is in the query string, so it can be opened again on a call.
 
 If the optional email endpoint is down, the page still computes locally.
+
+## The Frame on this site
+
+`/frame`, `/sample`, and the home page render `content/sample-frame.json`, a `frame/1` document, through one static component (`src/components/FrameView.astro`). No script runs in the browser. `/case` is the exception: it reads the log's own `frame/1` document once, with no credentials and nothing stored, and draws it with the same stylesheet. If the log cannot be reached the page shows a dark block, not an error. Each node's state is written by the producer and can be re-derived from its age against the threshold: a `null` value is dark, an age inside the window is current, past it is stale. The renderer may reshape; it may never promote.
+
+## Vocabulary
+
+The same three states wear three names across the places they appear.
+
+| frame/1 | The log's pulse | Cerebral Frame copy |
+|---|---|---|
+| current — age within the threshold | LIVE | current |
+| stale — age past the threshold | STALE / DOWN | stale |
+| dark — never measured, or absent | DARK | dark |
 
 ## Tests
 

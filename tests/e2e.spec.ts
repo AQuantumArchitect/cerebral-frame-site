@@ -81,3 +81,10 @@ test("talk offers self-built booking and a video note", async ({ page, request }
   await expect(page.locator("#book")).toBeVisible();
   await expect(page.locator("#video-note input[capture]")).toBeVisible();
 });
+
+test("case page shows a Frame block either way and links the log", async ({ page }) => {
+  await page.goto("/case");
+  await expect(page.locator("#case-frame .frame-view")).toBeVisible();
+  await expect(page.locator("a[href*='the-broadcast'][href*='engine']").first()).toBeVisible();
+  await expect(page.locator("header nav a[href*='the-broadcast']")).toHaveAttribute("target", "_blank");
+});

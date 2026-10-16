@@ -1,10 +1,12 @@
 ---
 import Base from "../layouts/Base.astro";
 import PrintButton from "../components/PrintButton.astro";
-import { loadSite, loadCopyHtml, telHref } from "../lib/site";
+import FrameView from "../components/FrameView.astro";
+import { loadSite, loadCopyHtml, loadSampleFrame, telHref } from "../lib/site";
 
 const site = loadSite();
 const html = loadCopyHtml("home");
+const frame = loadSampleFrame();
 ---
 <Base title="Cerebral Frame" description={site.magnetic} path="/">
   <div class="wrap">
@@ -18,6 +20,8 @@ const html = loadCopyHtml("home");
         <a class="btn btn-ghost" href="/talk">{site.tertiary_cta}</a>
       </div>
     </section>
+    <FrameView doc={frame} compact heading="p" />
+    <p class="caption frame-caption"><a href="/frame">{site.frame_caption}</a> <a href="/case">{site.case_caption}</a></p>
     <div class="prose" set:html={html} />
     <div class="actions no-print">
       <PrintButton />

@@ -11,9 +11,17 @@ const html = loadCopyHtml("talk");
 const talkUrl = new URL("/talk", site.url).toString();
 const qrSvg = await QRCode.toString(talkUrl, { type: "svg", margin: 1, width: 160, color: { dark: "#1C1916", light: "#FFFCF7" } });
 ---
-<Base title={`Talk · ${site.name}`} description="Call, email, or book twenty minutes." path="/talk">
+<Base title={`Talk · ${site.name}`} description={`Book the half-day consultation (${site.consultation.price}), or call, email, or book twenty minutes.`} path="/talk">
   <div class="wrap">
     <div class="prose" set:html={html} />
+    <section class="consult-door" id="consult" aria-labelledby="consult-h">
+      <h2 id="consult-h">{site.consultation.talk_heading}</h2>
+      <p>{site.consultation.talk_lead}</p>
+      <div class="actions">
+        <a class="btn" href="#book">{site.tertiary_cta}</a>
+        <a class="btn btn-ghost" href="/work#consultation">What happens in it</a>
+      </div>
+    </section>
     <div class="doors">
       <article class="door">
         <h2>Call</h2>
@@ -40,3 +48,23 @@ const qrSvg = await QRCode.toString(talkUrl, { type: "svg", margin: 1, width: 16
     <div class="qr" set:html={qrSvg} />
   </div>
 </Base>
+
+<style>
+  .consult-door {
+    background: var(--card);
+    border: 2px solid var(--ink);
+    padding: 1.25rem;
+    max-width: var(--measure);
+    margin: 1rem 0 2rem;
+  }
+
+  .consult-door h2 {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    margin: 0 0 0.5rem;
+  }
+
+  .consult-door .actions {
+    margin: 1rem 0 0;
+  }
+</style>

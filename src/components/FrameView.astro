@@ -1,0 +1,107 @@
+---
+import "../styles/frame.css";
+import type { FrameDoc, FrameNode } from "../lib/site";
+
+interface Props {
+  doc: FrameDoc;
+  compact?: boolean;
+  heading?: "h1" | "h2" | "p";
+}
+
+const { doc, compact = false, heading = "h2" } = Astro.props;
+const Heading = heading;
+
+const COMPACT_IDS = [
+  "orders_week",
+  "late_jobs",
+  "special_order_blades",
+  "vendor_backorders",
+  "saturday_counter_demand",
+];
+
+const nodes: FrameNode[] = compact
+  ? COMPACT_IDS.map((id) => doc.nodes.find((n) => n.id === id)).filter((n): n is FrameNode => Boolean(n))
+  : doc.nodes;
+
+const counts = { current: 0, stale: 0, dark: 0 };
+for (const n of doc.nodes) counts[n.state] += 1;
+
+const asOf = new Intl.DateTimeFormat("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+  hour: "2-digit",
+  minute: "2-digit",
+  hour12: false,
+  timeZone: "UTC",
+  timeZoneName: "short",
+}).format(new Date(doc.as_of));
+
+const money = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+
+function age(s: number | null): string {
+  if (s === null) return "—";
+  if (s < 3600) return `${Math.max(1, Math.round(s / 60))}m`;
+  if (s < 48 * 3600) return `${Math.round(s / 3600)}h`;
+  const d = s / 86400;
+  return Number.isInteger(d) ? `${d}d` : `${d.toFixed(1)}d`;
+}
+
+function show(n: FrameNode): string {
+  if (n.value === null) return "DARK";
+  if (typeof n.value === "number") {
+    if (n.unit === "USD") return `$${money.format(n.value)}`;
+    return n.unit ? `${money.format(n.value)} ${n.unit}` : money.format(n.value);
+  }
+  return String(n.value);
+}
+
+const labelOf = (id: string) => doc.nodes.find((n) => n.id === id)?.label ?? id;
+---
+<section class:list={["frame-view", { compact }]} aria-label={`Frame of ${doc.subject}`}>
+  <header class="frame-head">
+    <div>
+      <p class="frame-kicker">{doc.producer.kind}</p>
+      <Heading class="frame-subject">{doc.subject}</Heading>
+      <p class="frame-asof">as of {asOf}</p>
+    </div>
+    <p class="frame-counts">
+      <span class="s-current">{counts.current} current</span>
+      <span aria-hidden="true"> · </span>
+      <span class="s-stale">{counts.stale} stale</span>
+      <span aria-hidden="true"> · </span>
+      <span class="s-dark">{counts.dark} dark</span>
+    </p>
+  </header>
+
+  <ul class="frame-grid">
+    {nodes.map((n) => (
+      <li class:list={["tile", `is-${n.state}`]}>
+        <div class="tile-top">
+          <span class="tile-label">{n.label}</span>
+          <span class:list={["badge", `badge-${n.state}`]}>{n.state}</span>
+        </div>
+        <strong class:list={["tile-value", { dark: n.value === null }]}>{show(n)}</strong>
+        <p class="tile-age">
+          {n.value === null ? "age —" : `age ${age(n.age_s)}`}
+        </p>
+        {!compact && <p class="tile-source">{n.source}</p>}
+        {n.note && <p class="tile-note">{n.note}</p>}
+      </li>
+    ))}
+  </ul>
+
+  {!compact && doc.edges && doc.edges.length > 0 && (
+    <ul class="frame-edges">
+      {doc.edges.map((e) => (
+        <li>
+          <span>{labelOf(e.from)}</span>
+          <span class="rel">{e.rel} →</span>
+          <span>{labelOf(e.to)}</span>
+        </li>
+      ))}
+    </ul>
+  )}
+
+  {!compact && <p class="frame-law">{doc.law}</p>}
+</section>

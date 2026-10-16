@@ -1,0 +1,64 @@
+---
+import "../styles/frame.css";
+import Base from "../layouts/Base.astro";
+import { loadSite, loadCopyHtml } from "../lib/site";
+
+const site = loadSite();
+const html = loadCopyHtml("case");
+const cs = site.case;
+// The copy file opens with the h1 and the first paragraph; the live Frame
+// goes between that paragraph and the first h2.
+const cut = html.indexOf("<h2");
+const before = cut === -1 ? html : html.slice(0, cut);
+const after = cut === -1 ? "" : html.slice(cut);
+---
+<Base title={`Our own operation, live · ${site.name}`} description="The Frame of our own company, read live from the log that runs our operation. It mostly reads stale or dark today; that is what a Frame is for." path="/case">
+  <div class="wrap">
+    <div class="prose" set:html={before} />
+
+    <div
+      id="case-frame"
+      data-src={cs.source}
+      data-subject={cs.subject}
+      data-kicker={cs.kicker}
+      data-reading={cs.reading}
+      data-ago={cs.ago}
+    >
+      <section class="frame-view" aria-label={`Frame of ${cs.subject}`}>
+        <header class="frame-head">
+          <div>
+            <p class="frame-kicker">{cs.kicker}</p>
+            <p class="frame-subject">{cs.subject}</p>
+            <p class="frame-asof">as of —</p>
+          </div>
+          <p class="frame-counts"><span class="s-dark">dark</span></p>
+        </header>
+        <ul class="frame-grid">
+          <li class="tile is-dark">
+            <div class="tile-top">
+              <span class="tile-label">The log</span>
+              <span class="badge badge-dark">dark</span>
+            </div>
+            <strong class="tile-value dark">DARK</strong>
+            <p class="tile-age" data-case-status></p>
+            <p class="tile-source">{cs.source}</p>
+          </li>
+        </ul>
+        <p class="frame-law">{cs.unreachable} <a href={cs.engine} rel="noopener">{cs.engine_link}</a>.</p>
+      </section>
+    </div>
+
+    <p class="caption"><a href={cs.engine} rel="noopener">{cs.engine_link}</a></p>
+
+    <div class="prose" set:html={after} />
+
+    <div class="actions no-print">
+      <a class="btn" href="/work#consultation">{site.labels.book}</a>
+      <a class="btn btn-secondary" href="/frame">What a Frame is</a>
+    </div>
+  </div>
+</Base>
+
+<script>
+  import "../scripts/case";
+</script>
