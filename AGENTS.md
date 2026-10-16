@@ -13,7 +13,14 @@ alone. Never “Brain Frame.” Never a Broadcast console skin.
 
 Primary visitor: owner or operator of a small or mid-size company, anywhere,
 who wants the computer work built properly. Secondary: a technical buyer who
-wants proof we ship. Positioning (Luke, 2026-10-14): a small, fast
+wants proof we ship. **Lane decision (proposed 2026-10-16 at η 0.25, muse
+issue #7; Luke confirms): both buyers, one voice.** Two kinds of company
+call: the shop down the road (walk-in; we walk the floor) and the operation
+anywhere (remote; fly in when it matters). Same Frame, same prices, same
+outfit voice. The walk-in lane keeps its affordances — QR-to-call on /talk,
+the 20-second video note, counter-friendly print — and has its own artifact,
+`/onepager`. Do not strip those to look upmarket; do not add folksy copy to
+look local. Positioning (Luke, 2026-10-14): a small, fast
 engineering outfit — code, automation, and **Frames** (belief graphs of one
 company over its own ledger) as the primary offer. Confident, not folksy.
 The word "mercenary" describes the voice; it does not appear in copy.
@@ -53,6 +60,18 @@ respect `prefers-reduced-motion`.
 
 - All sentences live in `content/`. Components do not contain sentences.
 - If `content/facts.md` is absent, do not invent employers or metrics.
+- **No clients yet (Luke).** Nothing made up: no case studies, no testimonials,
+  no before/after "from past projects", no percentage or dollar claims about
+  results. Where the offer is described, say no client Frame has shipped.
+  The sample Frame is labelled an example; its numbers are invented and say so.
+- Locked (2026-10-16): the trust callout, `trust:` in `site.yaml` — "We work
+  inside what you already pay for." We build on the Excel, Google Workspace,
+  QuickBooks, job tickets, and email the client already runs on; lightweight
+  tools they own; no per-seat licenses; no lock-in; if they stop working with
+  us everything keeps running. True; rendered by `TrustCallout.astro` on `/`
+  (after the compact Frame), `/frame` (before "Questions owners ask"), `/work`
+  (above the offers), and the back of `/onepager`; composed into `/work.md`
+  and `llms.txt`.
 - Locked facts you may state: Luke Spooner · (805) 236-8182 · physicist by
   training · years in manufacturing and technical sales · remote by default,
   on site when it matters. Camarillo / Ventura County are true but no longer
@@ -102,6 +121,22 @@ share it): `doc`, optional `compact` (five tiles, no sources),
 optional `heading` (h1 / h2 / p). Used on `/` (compact), `/frame`, `/sample`.
 Loader: `loadSampleFrame()` in `src/lib/site.ts`.
 
+## One-pager (`/onepager`)
+
+The print artifact for the walk-in lane: two sides, hand it across a counter.
+`src/pages/onepager.astro` + `content/copy/onepager-front.md` and
+`onepager-back.md`; structured lines (the three states, "Start with a $400
+half-day consultation.", labels) under `onepager:` in `site.yaml`. Front: the
+hero line, the three states one line each, the compact sample Frame, the
+consultation. Back: consultation, Map / Build / Hold with typical prices from
+`offers`, the thirds, the trust callout, phone large, email, cerebralframe.com.
+Print: letter, page break between the sides, no site header, nav, or footer
+(page-level global print rule), phone at 24pt. **Names no city** — the reader
+is standing where it was handed over. Not in the nav; linked from /work
+("On paper") and /talk; listed in `llms.txt`. Copy drafted at the S3 acquire
+station (semantica3 `examples/acquire/drafts/onepager-copy.md`); when the two
+drift, this site's `content/` is what prints.
+
 ## Case (`/case`)
 
 "Our own operation, live." The second and last page allowed a script
@@ -112,7 +147,12 @@ no storage, no credentials. The renderer may reshape a node and never
 promote one: a producer's stale or dark stands; a producer's current is
 demoted when its own age is past the threshold. If the fetch fails or JS is
 off, the static block stays — dark, not an error — with a plain link to the
-log's Engine page. `server.js` CSP `connect-src` allows the two log hosts.
+log's Engine page. **Honesty badge:** the first line of the Frame block is
+`Last machine report: <as_of date> (<age> ago)`, derived from the document's
+`as_of` (freshest node age as fallback); past seven days it is prefixed
+`stale — ` (`.frame-report.is-stale`). The static fallback reads
+`Last machine report: none received yet`. Labels are `case.report_*` in
+`site.yaml`. Never hide it, on screen or in print. `server.js` CSP `connect-src` allows the two log hosts.
 Nav: not in it; linked from /frame, the home caption, the footer, and
 `llms.txt`. Nav's last item is the log itself (`external: true` opens a
 new tab).
@@ -157,7 +197,9 @@ Custom domain needs CNAME + TXT. Canonical `https://cerebralframe.com`.
 
 - Header phone is a `tel:` link, visible at 390×844, survives 200% zoom.
 - `/scan` with JS produces a result; without JS, noscript + Talk links.
-- `/sample` prints. `/card.vcf` downloads. `/llms.txt` and `/work.md` 200.
+- `/sample` prints. `/onepager` prints as two sides without site chrome.
+  `/card.vcf` downloads. `/llms.txt` and `/work.md` 200.
+- `/case` shows the honesty badge with or without a live report.
 - Form ≤ 5 fields; success repeats the phone number.
 - Footer has `How this site is built` → `/built-with`. Not in the header.
 - No banned words in rendered HTML.

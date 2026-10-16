@@ -1,0 +1,47 @@
+---
+// "We work inside what you already pay for." Sentences live in
+// content/site.yaml under `trust:`; this component only shapes them.
+import { loadSite } from "../lib/site";
+
+interface Props {
+  heading?: "h2" | "h3" | "p";
+}
+
+const { heading = "h2" } = Astro.props;
+const Heading = heading;
+const { trust } = loadSite();
+---
+<aside class="trust" aria-label={trust.heading}>
+  <Heading class="trust-heading">{trust.heading}</Heading>
+  <p class="trust-text">{trust.text}</p>
+</aside>
+
+<style>
+  .trust {
+    max-width: var(--measure);
+    border-left: 4px solid var(--ok);
+    background: var(--card);
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0 2rem;
+  }
+
+  .trust-heading {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 1.2rem;
+    line-height: 1.25;
+    margin: 0 0 0.4rem;
+  }
+
+  .trust-text {
+    margin: 0;
+    color: var(--ink-soft);
+  }
+
+  @media print {
+    .trust {
+      border-left-width: 3pt;
+      break-inside: avoid;
+    }
+  }
+</style>

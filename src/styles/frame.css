@@ -12,6 +12,23 @@
   max-width: 56rem;
 }
 
+/* Honesty badge on /case: when the machine last reported. Never hidden. */
+.frame-report {
+  display: inline-block;
+  margin: 0 0 0.75rem;
+  padding: 0.15rem 0.5rem;
+  border: 1px solid var(--ink-soft);
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.frame-report.is-stale {
+  border-color: var(--warn);
+  color: var(--warn);
+}
+
 .frame-head {
   display: flex;
   flex-wrap: wrap;

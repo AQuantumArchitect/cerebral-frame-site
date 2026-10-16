@@ -100,4 +100,32 @@ test("case executes under production CSP and renders a received Frame", async ({
   await expect(page.locator('#case-frame')).toContainText('Live evidence fixture');
   await expect(page.locator('#case-frame')).toContainText('Received observation');
   await expect(page.locator('#case-frame .tile-value')).toHaveText('7');
+  await expect(page.locator('#case-frame .frame-report')).toContainText('Last machine report');
+  await expect(page.locator('#case-frame .frame-report')).not.toContainText('stale —');
+});
+
+test("case honesty badge is visible without a live report and says stale for an old one", async ({ page }) => {
+  await page.route('https://the-broadcast-production.up.railway.app/api/frame', route => route.fulfill({
+    contentType: 'application/json',
+    headers: { 'access-control-allow-origin': '*' },
+    body: JSON.stringify({schema: 'frame/1', subject: 'Old fixture', as_of: new Date(Date.now() - 30 * 86400 * 1000).toISOString(), stale_after_s: 3600,
+      nodes: [{id: 'old', label: 'Old observation', value: 1, age_s: 0, state: 'current'}]}),
+  }));
+  await page.goto('/case');
+  const badge = page.locator('#case-frame .frame-report');
+  await expect(badge).toBeVisible();
+  await expect(badge).toContainText('stale — Last machine report');
+});
+
+test("one-pager has two sides, a print control, and the phone number", async ({ page }) => {
+  await page.goto("/onepager");
+  await expect(page.getByRole("heading", { name: "Your business, as a live map." })).toBeVisible();
+  await expect(page.locator(".sheet-front")).toBeVisible();
+  await expect(page.locator(".sheet-back")).toBeVisible();
+  await expect(page.locator(".sheet-front .frame-view.compact")).toBeVisible();
+  await expect(page.getByRole("button", { name: "Print the one-pager" }).first()).toBeVisible();
+  await expect(page.locator(".sheet-back a[href^='tel:']").first()).toContainText("(805) 236-8182");
+  const text = (await page.locator("main").innerText()).toLowerCase();
+  expect(text).not.toContain("camarillo");
+  await expect(page.locator("header nav a[href='/onepager']")).toHaveCount(0);
 });

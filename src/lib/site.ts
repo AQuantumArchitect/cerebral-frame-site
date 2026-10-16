@@ -44,6 +44,33 @@ export interface CaseConfig {
   unreachable: string;
   engine_link: string;
   ago: string;
+  report_label: string;
+  report_none: string;
+  report_stale_prefix: string;
+}
+
+export interface Trust {
+  heading: string;
+  text: string;
+}
+
+export interface OnePagerState {
+  state: "current" | "stale" | "dark";
+  line: string;
+}
+
+export interface OnePager {
+  title: string;
+  front_states: OnePagerState[];
+  start: string;
+  start_note: string;
+  then: string;
+  paying_label: string;
+  call_label: string;
+  email_label: string;
+  web_label: string;
+  front_side: string;
+  back_side: string;
 }
 
 export interface Labels {
@@ -95,6 +122,8 @@ export interface Site {
   labels: Labels;
   consultation: Consultation;
   case: CaseConfig;
+  trust: Trust;
+  onepager: OnePager;
   payment_terms: string;
   pricing_note: string;
   offers: Offer[];

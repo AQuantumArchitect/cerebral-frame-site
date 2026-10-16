@@ -1,18 +1,25 @@
 ---
 import Base from "../layouts/Base.astro";
 import FrameView from "../components/FrameView.astro";
+import TrustCallout from "../components/TrustCallout.astro";
 import { loadSite, loadCopyHtml, loadSampleFrame, telHref } from "../lib/site";
 
 const site = loadSite();
 const html = loadCopyHtml("frame");
 const after = loadCopyHtml("frame-after");
 const frame = loadSampleFrame();
+// The trust callout sits just before "Questions owners ask" in frame-after.md.
+const q = after.indexOf("<h2>Questions owners ask");
+const afterA = q === -1 ? after : after.slice(0, q);
+const afterB = q === -1 ? "" : after.slice(q);
 ---
 <Base title={`The Frame · ${site.name}`} description="A live model of one company: a belief graph over your own records, with every number marked current, stale, or dark. A worked example, how the Map runs, and the questions owners ask." path="/frame">
   <div class="wrap">
     <div class="prose" set:html={html} />
     <FrameView doc={frame} heading="p" />
-    <div class="prose" set:html={after} />
+    <div class="prose" set:html={afterA} />
+    <TrustCallout />
+    <div class="prose" set:html={afterB} />
     <div class="actions no-print">
       <a class="btn" href={telHref(site.phone)}>{site.primary_cta}</a>
       <a class="btn btn-secondary" href="/work">See the offers</a>

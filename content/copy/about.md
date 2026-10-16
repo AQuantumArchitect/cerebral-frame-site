@@ -6,6 +6,8 @@ We build code and automation for small and mid-size companies, and we build Fram
 
 Remote by default, anywhere. On site when the problem is on the floor.
 
+Two kinds of company call us: the shop down the road, where we walk the floor, and the operation anywhere, where we work remote and fly in when it matters. Same Frame, same prices.
+
 The long story, and the live Frame of our own operation, are on [the log](https://the-broadcast-production.up.railway.app/); the Frame is also read live on [this site](/case).
 
 ## Three years, in brief

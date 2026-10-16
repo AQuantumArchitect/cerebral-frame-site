@@ -50,6 +50,27 @@ case:
   unreachable: "This Frame is read live from the log, and the log could not be reached right now. That makes it dark, not broken: a Frame that cannot see its source says so."
   engine_link: "Open the Engine page on the log"
   ago: "ago"
+  report_label: "Last machine report"
+  report_none: "none received yet"
+  report_stale_prefix: "stale — "
+trust:
+  heading: "We work inside what you already pay for."
+  text: "No new enterprise software. We build on the Excel, Google Workspace, QuickBooks, job tickets, and email you already run on — lightweight tools you own, no per-seat licenses, no lock-in. If you stop working with us, everything keeps running."
+onepager:
+  title: "One-pager"
+  front_states:
+    - { state: current, line: "measured recently; run the week on it" }
+    - { state: stale, line: "measured once; ask before you act on it" }
+    - { state: dark, line: "nobody is measuring it; not zero — unknown" }
+  start: "Start with a $400 half-day consultation."
+  start_note: "In person when we can. You leave with a Frame sketch on one page and, within a week, a written proposal with deliverables and a price."
+  then: "Then one of three"
+  paying_label: "Paying"
+  call_label: "Call"
+  email_label: "Email"
+  web_label: "Web"
+  front_side: "Front"
+  back_side: "Back"
 payment_terms: "One third on signing. One third on delivery. One third on acceptance — you say when it is done, against the deliverables we wrote down."
 pricing_note: "Prices are typical ranges, not quotes; the proposal is the quote."
 offers:
