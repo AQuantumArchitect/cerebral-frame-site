@@ -1,0 +1,80 @@
+{
+  "schema": "frame/1",
+  "subject": "cerebral-frame",
+  "as_of": "2026-10-16T20:58:52Z",
+  "stale_after_s": 604800,
+  "law": "a value nobody measured is null and renders dark, never zero",
+  "producer": {
+    "name": "cerebral-frame",
+    "kind": "face",
+    "actor": "fable-51"
+  },
+  "nodes": [
+    {
+      "id": "status",
+      "label": "Status word",
+      "value": "DEPLOYED",
+      "state": "current",
+      "age_s": 0,
+      "source": "the-broadcast casting",
+      "note": "apex answers 200"
+    },
+    {
+      "id": "last_proof",
+      "label": "Last referee that ran",
+      "value": "CI: vitest + Playwright on PR #4",
+      "state": "current",
+      "age_s": 0,
+      "source": "GitHub Actions"
+    },
+    {
+      "id": "last_sentence",
+      "label": "What the last pass said",
+      "value": "offers page with consultation first; /frame worked sample; /case reads the log live; thirds payment terms",
+      "state": "current",
+      "age_s": 0,
+      "source": "PR #4 pass 3"
+    },
+    {
+      "id": "open_dams",
+      "label": "Things only Luke can do",
+      "value": "2",
+      "state": "current",
+      "age_s": 0,
+      "source": "merge PR #4; DNS for log.cerebralframe.com",
+      "unit": "PRs/issues"
+    },
+    {
+      "id": "earning_usd",
+      "label": "Earned",
+      "value": null,
+      "state": "dark",
+      "age_s": null,
+      "source": "never measured here"
+    },
+    {
+      "id": "customer_use",
+      "label": "Paying clients",
+      "value": false,
+      "state": "current",
+      "age_s": 0,
+      "source": "no client Frame has shipped yet"
+    },
+    {
+      "id": "live_url",
+      "label": "Public URL",
+      "value": "https://cerebralframe.com/",
+      "state": "current",
+      "age_s": 0,
+      "source": "apex probe 2026-10-14"
+    },
+    {
+      "id": "bearing_now",
+      "label": "What the agents steer toward this week",
+      "value": "first consultation booked; first Frame shipped with a case study",
+      "state": "current",
+      "age_s": 0,
+      "source": "content/copy/work.md"
+    }
+  ]
+}
